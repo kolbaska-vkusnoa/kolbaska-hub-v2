@@ -1,5 +1,5 @@
 -- ============================================
--- KOLBASKA HUB v2 ELITE — FULL + 12 VISUALS
+-- KOLBASKA HUB v2 FINAL — ЧАСТЬ 1/3
 -- ============================================
 local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
@@ -9,6 +9,148 @@ local Lighting = game:GetService("Lighting")
 local GuiService = game:GetService("GuiService")
 local LocalPlayer = Players.LocalPlayer
 
+-- ЗАГРУЗОЧНЫЙ ЭКРАН
+local loadingGui = Instance.new("ScreenGui")
+loadingGui.Name = "KolbaskaLoader"
+loadingGui.IgnoreGuiInset = true
+loadingGui.ResetOnSpawn = false
+loadingGui.DisplayOrder = 999
+loadingGui.Parent = LocalPlayer:WaitForChild("PlayerGui")
+
+local lbg = Instance.new("Frame")
+lbg.Size = UDim2.new(1, 0, 1, 0)
+lbg.BackgroundColor3 = Color3.fromRGB(12, 8, 20)
+lbg.BorderSizePixel = 0
+lbg.ZIndex = 1
+lbg.Parent = loadingGui
+
+local lcontainer = Instance.new("Frame")
+lcontainer.Size = UDim2.new(0, 400, 0, 220)
+lcontainer.Position = UDim2.new(0.5, -200, 0.5, -110)
+lcontainer.BackgroundTransparency = 1
+lcontainer.ZIndex = 2
+lcontainer.Parent = loadingGui
+
+local lringContainer = Instance.new("Frame")
+lringContainer.Size = UDim2.new(0, 120, 0, 120)
+lringContainer.Position = UDim2.new(0.5, -60, 0, 0)
+lringContainer.BackgroundTransparency = 1
+lringContainer.ZIndex = 3
+lringContainer.Parent = lcontainer
+
+local louterRing = Instance.new("Frame")
+louterRing.Size = UDim2.new(1, 0, 1, 0)
+louterRing.BackgroundTransparency = 1
+louterRing.ZIndex = 3
+louterRing.Parent = lringContainer
+
+local louterStroke = Instance.new("UIStroke")
+louterStroke.Thickness = 4
+louterStroke.Color = Color3.fromRGB(170, 110, 255)
+louterStroke.Transparency = 0.1
+louterStroke.Parent = louterRing
+
+local louterGradient = Instance.new("UIGradient")
+louterGradient.Color = ColorSequence.new({
+    ColorSequenceKeypoint.new(0, Color3.fromRGB(170, 110, 255)),
+    ColorSequenceKeypoint.new(0.5, Color3.fromRGB(210, 150, 255)),
+    ColorSequenceKeypoint.new(1, Color3.fromRGB(170, 110, 255)),
+})
+louterGradient.Parent = louterStroke
+
+local linnerRing = Instance.new("Frame")
+linnerRing.Size = UDim2.new(0.7, 0, 0.7, 0)
+linnerRing.Position = UDim2.new(0.15, 0, 0.15, 0)
+linnerRing.BackgroundTransparency = 1
+linnerRing.ZIndex = 3
+linnerRing.Parent = lringContainer
+
+local linnerStroke = Instance.new("UIStroke")
+linnerStroke.Thickness = 3
+linnerStroke.Color = Color3.fromRGB(255, 255, 255)
+linnerStroke.Transparency = 0.6
+linnerStroke.Parent = linnerRing
+
+local lcore = Instance.new("Frame")
+lcore.Size = UDim2.new(0.3, 0, 0.3, 0)
+lcore.Position = UDim2.new(0.35, 0, 0.35, 0)
+lcore.BackgroundColor3 = Color3.fromRGB(170, 110, 255)
+lcore.ZIndex = 4
+lcore.Parent = lringContainer
+Instance.new("UICorner", lcore).CornerRadius = UDim.new(1, 0)
+
+local ltitle = Instance.new("TextLabel")
+ltitle.Size = UDim2.new(1, 0, 0, 40)
+ltitle.Position = UDim2.new(0, 0, 0, 130)
+ltitle.BackgroundTransparency = 1
+ltitle.Text = "KOLBASKA HUB"
+ltitle.TextColor3 = Color3.fromRGB(255, 255, 255)
+ltitle.Font = Enum.Font.GothamBold
+ltitle.TextSize = 24
+ltitle.TextTransparency = 1
+ltitle.ZIndex = 3
+ltitle.Parent = lcontainer
+
+local lsub = Instance.new("TextLabel")
+lsub.Size = UDim2.new(1, 0, 0, 20)
+lsub.Position = UDim2.new(0, 0, 0, 165)
+lsub.BackgroundTransparency = 1
+lsub.Text = "загрузка..."
+lsub.TextColor3 = Color3.fromRGB(160, 140, 200)
+lsub.Font = Enum.Font.Gotham
+lsub.TextSize = 12
+lsub.TextTransparency = 1
+lsub.ZIndex = 3
+lsub.Parent = lcontainer
+
+local lbarBg = Instance.new("Frame")
+lbarBg.Size = UDim2.new(0, 300, 0, 6)
+lbarBg.Position = UDim2.new(0.5, -150, 0, 195)
+lbarBg.BackgroundColor3 = Color3.fromRGB(38, 28, 60)
+lbarBg.BorderSizePixel = 0
+lbarBg.BackgroundTransparency = 1
+lbarBg.ZIndex = 3
+lbarBg.Parent = lcontainer
+Instance.new("UICorner", lbarBg).CornerRadius = UDim.new(1, 0)
+
+local lbarFill = Instance.new("Frame")
+lbarFill.Size = UDim2.new(0, 0, 1, 0)
+lbarFill.BackgroundColor3 = Color3.fromRGB(170, 110, 255)
+lbarFill.BorderSizePixel = 0
+lbarFill.ZIndex = 4
+lbarFill.Parent = lbarBg
+Instance.new("UICorner", lbarFill).CornerRadius = UDim.new(1, 0)
+
+TweenService:Create(ltitle, TweenInfo.new(0.6), {TextTransparency = 0}):Play()
+TweenService:Create(lsub, TweenInfo.new(0.6), {TextTransparency = 0}):Play()
+TweenService:Create(lbarBg, TweenInfo.new(0.6), {BackgroundTransparency = 0}):Play()
+TweenService:Create(louterRing, TweenInfo.new(2, Enum.EasingStyle.Linear, Enum.EasingDirection.In, -1), {Rotation = 360}):Play()
+TweenService:Create(linnerRing, TweenInfo.new(1.5, Enum.EasingStyle.Linear, Enum.EasingDirection.In, -1), {Rotation = -360}):Play()
+
+local lprogress = 0
+local lprogressConn
+lprogressConn = RunService.Heartbeat:Connect(function(dt)
+    if lprogress < 1 then
+        lprogress = math.min(lprogress + dt * 0.7, 1)
+        lbarFill.Size = UDim2.new(lprogress, 0, 1, 0)
+    end
+end)
+
+task.wait(2.5)
+
+if lprogressConn then lprogressConn:Disconnect() end
+
+local fadeOut = TweenInfo.new(0.6, Enum.EasingStyle.Quad, Enum.EasingDirection.In)
+TweenService:Create(ltitle, fadeOut, {TextTransparency = 1}):Play()
+TweenService:Create(lsub, fadeOut, {TextTransparency = 1}):Play()
+TweenService:Create(lbarBg, fadeOut, {BackgroundTransparency = 1}):Play()
+TweenService:Create(lcontainer, fadeOut, {BackgroundTransparency = 1}):Play()
+TweenService:Create(lbg, fadeOut, {BackgroundTransparency = 1}):Play()
+
+task.wait(0.8)
+loadingGui:Destroy()
+
+-- ОСНОВНОЙ СКРИПТ
 local old = LocalPlayer:WaitForChild("PlayerGui"):FindFirstChild("KolbaskaHubGui")
 if old then old:Destroy() end
 
@@ -91,7 +233,7 @@ local versionLabel = Instance.new("TextLabel")
 versionLabel.Size = UDim2.new(0, 80, 1, 0)
 versionLabel.Position = UDim2.new(1, -130, 0, 0)
 versionLabel.BackgroundTransparency = 1
-versionLabel.Text = "v2 ELITE"
+versionLabel.Text = "v2 FINAL"
 versionLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
 versionLabel.Font = Enum.Font.GothamBold
 versionLabel.TextSize = 11
@@ -228,7 +370,7 @@ local watermark = Instance.new("TextLabel")
 watermark.Size = UDim2.new(1, -20, 0, 20)
 watermark.Position = UDim2.new(0, 10, 1, -50)
 watermark.BackgroundTransparency = 1
-watermark.Text = "KOLBASKA HUB v2 ELITE • @kolbaska_vkusnoa"
+watermark.Text = "KOLBASKA HUB v2 FINAL • @kolbaska_vkusnoa"
 watermark.TextColor3 = C_TEXT_DIM
 watermark.Font = Enum.Font.Gotham
 watermark.TextSize = 10
@@ -539,6 +681,10 @@ local config = {
     skyFogEnd = 500,
     skyFogStart = 50,
     fullbrightBright = 3,
+    particleSize = 3.0,
+    particleTexture = "rbxassetid://243660364",
+    skyboxName = "Default",
+    skyTime = 14,
 }
 
 -- CHINA HAT
@@ -721,6 +867,355 @@ end
 makeButton(visualsTab, "RGB Aura", function(btn, ind) toggleRgbAura(); if rgbAuraOn then setOn(btn, ind) else setOff(btn, ind) end; notify(rgbAuraOn and "RGB Aura вкл" or "RGB Aura выкл") end)
 bindActions["RGB Aura"] = toggleRgbAura
 
+-- ============================================
+-- 7 НОВЫХ ВИЗУАЛОВ (в Части 1)
+-- ============================================
+
+-- WISPS
+wispsOn = false
+wispsFolder = nil
+wispsConn = nil
+local function toggleWisps()
+    wispsOn = not wispsOn
+    if wispsOn then
+        local char = LocalPlayer.Character
+        local hrp = char and char:FindFirstChild("HumanoidRootPart")
+        if not hrp then return end
+        wispsFolder = Instance.new("Folder")
+        wispsFolder.Parent = workspace
+        local wisps = {}
+        for i = 1, 12 do
+            local p = Instance.new("Part")
+            p.Shape = Enum.PartType.Ball
+            p.Size = Vector3.new(0.25, 0.25, 0.25)
+            p.Color = Color3.fromHSV(math.random(), 0.7, 1)
+            p.Material = Enum.Material.Neon
+            p.Transparency = 0.2
+            p.Anchored = true
+            p.CanCollide = false
+            p.Parent = wispsFolder
+            table.insert(wisps, { part = p, angle = (i / 12) * math.pi * 2, y = math.random() * 3, phase = math.random() * math.pi * 2 })
+        end
+        if wispsConn then wispsConn:Disconnect() end
+        wispsConn = RunService.Heartbeat:Connect(function()
+            local c = LocalPlayer.Character
+            local h = c and c:FindFirstChild("HumanoidRootPart")
+            if not h then return end
+            for _, data in ipairs(wisps) do
+                local a = data.angle + tick() * 0.8
+                local wave = math.sin(tick() * 2 + data.phase) * 0.5
+                data.part.CFrame = h.CFrame * CFrame.new(math.cos(a) * 2.5, -1 + data.y + wave, math.sin(a) * 2.5)
+                data.part.Color = Color3.fromHSV((tick() * 0.2 + data.angle / (math.pi * 2)) % 1, 0.8, 1)
+            end
+        end)
+    else
+        if wispsConn then wispsConn:Disconnect() wispsConn = nil end
+        if wispsFolder then wispsFolder:Destroy() wispsFolder = nil end
+    end
+end
+makeButton(visualsTab, "Wisps", function(btn, ind) toggleWisps(); if wispsOn then setOn(btn, ind) else setOff(btn, ind) end; notify(wispsOn and "Wisps вкл" or "Wisps выкл") end)
+bindActions["Wisps"] = toggleWisps
+
+-- STARFIELD
+starfieldOn = false
+starfieldFolder = nil
+starfieldConn = nil
+local function toggleStarfield()
+    starfieldOn = not starfieldOn
+    if starfieldOn then
+        local char = LocalPlayer.Character
+        local hrp = char and char:FindFirstChild("HumanoidRootPart")
+        if not hrp then return end
+        starfieldFolder = Instance.new("Folder")
+        starfieldFolder.Parent = workspace
+        local stars = {}
+        for i = 1, 60 do
+            local p = Instance.new("Part")
+            p.Shape = Enum.PartType.Ball
+            local size = math.random(3, 10) / 100
+            p.Size = Vector3.new(size, size, size)
+            p.Color = Color3.fromRGB(255, 255, 255)
+            p.Material = Enum.Material.Neon
+            p.Anchored = true
+            p.CanCollide = false
+            p.Parent = starfieldFolder
+            table.insert(stars, {
+                part = p,
+                radius = math.random() * 20 + 5,
+                theta = math.random() * math.pi * 2,
+                phi = math.random() * math.pi,
+                speed = 0.1 + math.random() * 0.3
+            })
+        end
+        if starfieldConn then starfieldConn:Disconnect() end
+        starfieldConn = RunService.Heartbeat:Connect(function()
+            local c = LocalPlayer.Character
+            local h = c and c:FindFirstChild("HumanoidRootPart")
+            if not h then return end
+            for _, data in ipairs(stars) do
+                data.theta = data.theta + data.speed * 0.02
+                data.phi = data.phi + data.speed * 0.01
+                local x = data.radius * math.sin(data.phi) * math.cos(data.theta)
+                local y = data.radius * math.cos(data.phi)
+                local z = data.radius * math.sin(data.phi) * math.sin(data.theta)
+                data.part.CFrame = h.CFrame * CFrame.new(x, y, z)
+            end
+        end)
+    else
+        if starfieldConn then starfieldConn:Disconnect() starfieldConn = nil end
+        if starfieldFolder then starfieldFolder:Destroy() starfieldFolder = nil end
+    end
+end
+makeButton(visualsTab, "Starfield", function(btn, ind) toggleStarfield(); if starfieldOn then setOn(btn, ind) else setOff(btn, ind) end; notify(starfieldOn and "Starfield вкл" or "Starfield выкл") end)
+bindActions["Starfield"] = toggleStarfield
+
+-- LIGHTNING BELT
+beltOn = false
+beltFolder = nil
+beltConn = nil
+local function toggleBelt()
+    beltOn = not beltOn
+    if beltOn then
+        local char = LocalPlayer.Character
+        local hrp = char and char:FindFirstChild("HumanoidRootPart")
+        if not hrp then return end
+        beltFolder = Instance.new("Folder")
+        beltFolder.Parent = workspace
+        local bolts = {}
+        for i = 1, 18 do
+            local p = Instance.new("Part")
+            p.Size = Vector3.new(0.15, 0.6, 0.15)
+            p.Color = Color3.fromRGB(150, 200, 255)
+            p.Material = Enum.Material.Neon
+            p.Transparency = 0.2
+            p.Anchored = true
+            p.CanCollide = false
+            p.Parent = beltFolder
+            table.insert(bolts, { part = p, angle = (i / 18) * math.pi * 2 })
+        end
+        if beltConn then beltConn:Disconnect() end
+        beltConn = RunService.Heartbeat:Connect(function()
+            local c = LocalPlayer.Character
+            local h = c and c:FindFirstChild("HumanoidRootPart")
+            if not h then return end
+            local tilt = math.sin(tick() * 2) * 15
+            for _, data in ipairs(bolts) do
+                local a = data.angle + tick() * 4
+                data.part.CFrame = h.CFrame * CFrame.new(math.cos(a) * 2.8, -1.5, math.sin(a) * 2.8) * CFrame.Angles(0, a, math.rad(tilt + math.sin(tick() * 6) * 20))
+                data.part.Color = Color3.fromHSV(0.55 + math.sin(tick() * 5 + data.angle) * 0.05, 0.7, 1)
+            end
+        end)
+    else
+        if beltConn then beltConn:Disconnect() beltConn = nil end
+        if beltFolder then beltFolder:Destroy() beltFolder = nil end
+    end
+end
+makeButton(visualsTab, "Lightning Belt", function(btn, ind) toggleBelt(); if beltOn then setOn(btn, ind) else setOff(btn, ind) end; notify(beltOn and "Belt вкл" or "Belt выкл") end)
+bindActions["Lightning Belt"] = toggleBelt
+
+-- PLASMA CLOUDS
+cloudsOn = false
+cloudsFolder = nil
+cloudsConn = nil
+local function toggleClouds()
+    cloudsOn = not cloudsOn
+    if cloudsOn then
+        cloudsFolder = Instance.new("Folder")
+        cloudsFolder.Parent = workspace
+        local clouds = {}
+        for i = 1, 8 do
+            local p = Instance.new("Part")
+            p.Shape = Enum.PartType.Ball
+            p.Size = Vector3.new(1.5, 1.5, 1.5)
+            p.Color = Color3.fromHSV(math.random(), 0.5, 1)
+            p.Material = Enum.Material.Neon
+            p.Transparency = 0.6
+            p.Anchored = true
+            p.CanCollide = false
+            p.Parent = cloudsFolder
+            table.insert(clouds, { part = p, offset = Vector3.new(math.random(-5, 5), math.random(-2, 4), math.random(-5, 5)), phase = math.random() * math.pi * 2, hue = math.random() })
+        end
+        if cloudsConn then cloudsConn:Disconnect() end
+        cloudsConn = RunService.Heartbeat:Connect(function()
+            local c = LocalPlayer.Character
+            local h = c and c:FindFirstChild("HumanoidRootPart")
+            if not h then return end
+            for _, data in ipairs(clouds) do
+                local float = Vector3.new(0, math.sin(tick() + data.phase) * 0.5, 0)
+                data.part.CFrame = h.CFrame * CFrame.new(data.offset + float)
+                data.part.Color = Color3.fromHSV((data.hue + tick() * 0.1) % 1, 0.5, 1)
+                local size = 1.5 + math.sin(tick() * 2 + data.phase) * 0.3
+                data.part.Size = Vector3.new(size, size, size)
+            end
+        end)
+    else
+        if cloudsConn then cloudsConn:Disconnect() cloudsConn = nil end
+        if cloudsFolder then cloudsFolder:Destroy() cloudsFolder = nil end
+    end
+end
+makeButton(visualsTab, "Plasma Clouds", function(btn, ind) toggleClouds(); if cloudsOn then setOn(btn, ind) else setOff(btn, ind) end; notify(cloudsOn and "Clouds вкл" or "Clouds выкл") end)
+bindActions["Plasma Clouds"] = toggleClouds
+
+-- ORBITAL BEAMS
+beamsOn = false
+beamsFolder = nil
+beamsConn = nil
+local function toggleBeams()
+    beamsOn = not beamsOn
+    if beamsOn then
+        local char = LocalPlayer.Character
+        local hrp = char and char:FindFirstChild("HumanoidRootPart")
+        if not hrp then return end
+        beamsFolder = Instance.new("Folder")
+        beamsFolder.Parent = workspace
+        local beams = {}
+        for i = 1, 6 do
+            local p = Instance.new("Part")
+            p.Size = Vector3.new(0.1, 0.1, 5)
+            p.Color = C_ACCENT
+            p.Material = Enum.Material.Neon
+            p.Transparency = 0.3
+            p.Anchored = true
+            p.CanCollide = false
+            p.Parent = beamsFolder
+            table.insert(beams, { part = p, angle = (i / 6) * math.pi * 2 })
+        end
+        if beamsConn then beamsConn:Disconnect() end
+        beamsConn = RunService.Heartbeat:Connect(function()
+            local c = LocalPlayer.Character
+            local h = c and c:FindFirstChild("HumanoidRootPart")
+            if not h then return end
+            for _, data in ipairs(beams) do
+                local a = data.angle + tick() * 2
+                local tilt = math.sin(tick() * 3 + data.angle) * 30
+                data.part.CFrame = h.CFrame * CFrame.new(math.cos(a) * 3, 0, math.sin(a) * 3) * CFrame.Angles(math.rad(tilt), a, 0)
+                data.part.Color = Color3.fromHSV((tick() * 0.3 + data.angle) % 1, 0.8, 1)
+            end
+        end)
+    else
+        if beamsConn then beamsConn:Disconnect() beamsConn = nil end
+        if beamsFolder then beamsFolder:Destroy() beamsFolder = nil end
+    end
+end
+makeButton(visualsTab, "Orbital Beams", function(btn, ind) toggleBeams(); if beamsOn then setOn(btn, ind) else setOff(btn, ind) end; notify(beamsOn and "Beams вкл" or "Beams выкл") end)
+bindActions["Orbital Beams"] = toggleBeams
+
+-- PHANTOM CLONES
+clonesOn = false
+clonesFolder = nil
+clonesConn = nil
+local function toggleClones()
+    clonesOn = not clonesOn
+    if clonesOn then
+        clonesFolder = Instance.new("Folder")
+        clonesFolder.Parent = workspace
+        local clones = {}
+        local char = LocalPlayer.Character
+        if not char then return end
+        for i = 1, 3 do
+            local clone = char:Clone()
+            clone.Parent = clonesFolder
+            local hum = clone:FindFirstChildOfClass("Humanoid")
+            if hum then hum:Destroy() end
+            for _, part in ipairs(clone:GetDescendants()) do
+                if part:IsA("BasePart") then
+                    part.Anchored = true
+                    part.CanCollide = false
+                    part.Transparency = 0.5
+                    part.Color = C_ACCENT
+                    part.Material = Enum.Material.Neon
+                end
+            end
+            table.insert(clones, { model = clone, angle = (i / 3) * math.pi * 2, offset = i })
+        end
+        if clonesConn then clonesConn:Disconnect() end
+        clonesConn = RunService.Heartbeat:Connect(function()
+            local c = LocalPlayer.Character
+            local h = c and c:FindFirstChild("HumanoidRootPart")
+            if not h then return end
+            for _, data in ipairs(clones) do
+                if not data.model.PrimaryPart then
+                    for _, p in ipairs(data.model:GetDescendants()) do
+                        if p.Name == "HumanoidRootPart" then data.model.PrimaryPart = p break end
+                    end
+                end
+                local a = data.angle + tick() * 1.5
+                local offsetPos = h.CFrame * CFrame.new(math.cos(a) * (3 + data.offset), 0, math.sin(a) * (3 + data.offset))
+                if data.model.PrimaryPart then
+                    data.model:SetPrimaryPartCFrame(offsetPos * CFrame.Angles(0, a + math.pi, 0))
+                end
+            end
+        end)
+    else
+        if clonesConn then clonesConn:Disconnect() clonesConn = nil end
+        if clonesFolder then clonesFolder:Destroy() clonesFolder = nil end
+    end
+end
+makeButton(visualsTab, "Phantom Clones", function(btn, ind) toggleClones(); if clonesOn then setOn(btn, ind) else setOff(btn, ind) end; notify(clonesOn and "Clones вкл" or "Clones выкл") end)
+bindActions["Phantom Clones"] = toggleClones
+
+-- CROWN OF STARS
+starCrownOn = false
+starCrownFolder = nil
+starCrownConn = nil
+local function toggleStarCrown()
+    starCrownOn = not starCrownOn
+    if starCrownOn then
+        local char = LocalPlayer.Character
+        local head = char and char:FindFirstChild("Head")
+        if not head then return end
+        starCrownFolder = Instance.new("Folder")
+        starCrownFolder.Parent = char
+        local stars = {}
+        for i = 1, 10 do
+            local p = Instance.new("Part")
+            p.Shape = Enum.PartType.Ball
+            p.Size = Vector3.new(0.3, 0.3, 0.3)
+            p.Color = Color3.fromRGB(255, 240, 150)
+            p.Material = Enum.Material.Neon
+            p.Anchored = false
+            p.CanCollide = false
+            p.Massless = true
+            p.CFrame = head.CFrame * CFrame.new(0, 2, 0)
+            local w = Instance.new("WeldConstraint")
+            w.Part0 = head
+            w.Part1 = p
+            w.Parent = p
+            p.Parent = starCrownFolder
+            table.insert(stars, { part = p, angle = (i / 10) * math.pi * 2 })
+        end
+        if starCrownConn then starCrownConn:Disconnect() end
+        starCrownConn = RunService.Heartbeat:Connect(function()
+            local c = LocalPlayer.Character
+            local h = c and c:FindFirstChild("Head")
+            if not h then return end
+            for _, data in ipairs(stars) do
+                local a = data.angle + tick() * 1.5
+                local pulse = 1 + math.sin(tick() * 4 + data.angle) * 0.2
+                data.part.CFrame = h.CFrame * CFrame.new(math.cos(a) * 1.5, 2 + math.sin(tick() * 3 + data.angle) * 0.2, math.sin(a) * 1.5)
+                data.part.Size = Vector3.new(0.3 * pulse, 0.3 * pulse, 0.3 * pulse)
+                data.part.Color = Color3.fromHSV((tick() * 0.3 + data.angle / (math.pi * 2)) % 1, 0.5, 1)
+            end
+        end)
+    else
+        if starCrownConn then starCrownConn:Disconnect() starCrownConn = nil end
+        if starCrownFolder then starCrownFolder:Destroy() starCrownFolder = nil end
+    end
+end
+makeButton(visualsTab, "Crown of Stars", function(btn, ind) toggleStarCrown(); if starCrownOn then setOn(btn, ind) else setOff(btn, ind) end; notify(starCrownOn and "Crown of Stars вкл" or "Crown of Stars выкл") end)
+bindActions["Crown of Stars"] = toggleStarCrown
+
+-- 🔻 ПРОДОЛЖЕНИЕ В ЧАСТИ 2/3 🔻-- ============================================
+-- KOLBASKA HUB v3 FINAL — ЧАСТЬ 2/3
+-- Visuals: Halo, Crown, Horns, Heart, Sword, Portal, Fire, Ice, Lightning
+-- + Jump Circle, Particles, Name Tags, Fullbright, Custom Sky, Aspect, Crosshair, FOV Circle
+-- + 12 крутых: Black Hole, Soul Flame, Energy Beam, Aura Wings, Rainbow Wave, Fire Ring,
+--   Ice Crystals, Shadow Aura, Golden Aura, Laser Eyes, Snow Aura, Galaxy Orbit
+-- + Trail, Head Aura, Snowflakes, Music Notes, Orbiting Orbs, Skull Aura, Galaxy Aura,
+--   Lightning Aura, Tornado Aura, Fire Trail, Ice Trail, Footsteps, Angel Wings
+-- ============================================
+
+-- HALO
 haloOn = false
 haloFolder = nil
 haloConn = nil
@@ -784,6 +1279,7 @@ makeButton(visualsTab, "Halo", function(btn, ind) toggleHalo(); if haloOn then s
 })
 bindActions["Halo"] = toggleHalo
 
+-- CROWN
 crownOn = false
 crownFolder = nil
 local function toggleCrown()
@@ -865,6 +1361,7 @@ end
 makeButton(visualsTab, "Crown", function(btn, ind) toggleCrown(); if crownOn then setOn(btn, ind) else setOff(btn, ind) end; notify(crownOn and "Crown вкл" or "Crown выкл") end)
 bindActions["Crown"] = toggleCrown
 
+-- HORNS (первая версия, простая)
 hornsOn = false
 hornsFolder = nil
 local function toggleHorns()
@@ -918,6 +1415,7 @@ end
 makeButton(visualsTab, "Horns", function(btn, ind) toggleHorns(); if hornsOn then setOn(btn, ind) else setOff(btn, ind) end; notify(hornsOn and "Horns вкл" or "Horns выкл") end)
 bindActions["Horns"] = toggleHorns
 
+-- JUMP CIRCLE
 jumpCircleOn = false
 local function spawnJumpCircle()
     local char = LocalPlayer.Character
@@ -961,7 +1459,9 @@ local function hookCharacter(char)
 end
 if LocalPlayer.Character then hookCharacter(LocalPlayer.Character) end
 LocalPlayer.CharacterAdded:Connect(hookCharacter)
+bindActions["Jump Circle"] = function() jumpCircleOn = not jumpCircleOn end
 
+-- PARTICLES
 skyFolder = nil
 skyParticlesOn = false
 local function createSkyParticles()
@@ -1036,6 +1536,7 @@ makeButton(visualsTab, "Particles", function(btn, ind)
 end)
 bindActions["Particles"] = toggleParticles
 
+-- HEART AURA
 heartOn = false
 heartFolder = nil
 heartConn = nil
@@ -1110,6 +1611,7 @@ end
 makeButton(visualsTab, "Heart Aura", function(btn, ind) toggleHeart(); if heartOn then setOn(btn, ind) else setOff(btn, ind) end; notify(heartOn and "Heart вкл" or "Heart выкл") end)
 bindActions["Heart Aura"] = toggleHeart
 
+-- SWORD CIRCLE
 swordOn = false
 swordFolder = nil
 swordConn = nil
@@ -1178,6 +1680,7 @@ end
 makeButton(visualsTab, "Sword Circle", function(btn, ind) toggleSword(); if swordOn then setOn(btn, ind) else setOff(btn, ind) end; notify(swordOn and "Sword вкл" or "Sword выкл") end)
 bindActions["Sword Circle"] = toggleSword
 
+-- PORTAL
 portalOn = false
 portalFolder = nil
 portalConn = nil
@@ -1229,6 +1732,7 @@ end
 makeButton(visualsTab, "Portal Effect", function(btn, ind) togglePortal(); if portalOn then setOn(btn, ind) else setOff(btn, ind) end; notify(portalOn and "Portal вкл" or "Portal выкл") end)
 bindActions["Portal Effect"] = togglePortal
 
+-- FIRE AURA
 fireAuraOn = false
 fireAuraFolder = nil
 fireAuraConn = nil
@@ -1269,6 +1773,7 @@ end
 makeButton(visualsTab, "Fire Aura", function(btn, ind) toggleFireAura(); if fireAuraOn then setOn(btn, ind) else setOff(btn, ind) end; notify(fireAuraOn and "Fire вкл" or "Fire выкл") end)
 bindActions["Fire Aura"] = toggleFireAura
 
+-- ICE AURA
 iceAuraOn = false
 iceAuraFolder = nil
 iceAuraConn = nil
@@ -1306,6 +1811,7 @@ end
 makeButton(visualsTab, "Ice Aura", function(btn, ind) toggleIceAura(); if iceAuraOn then setOn(btn, ind) else setOff(btn, ind) end; notify(iceAuraOn and "Ice вкл" or "Ice выкл") end)
 bindActions["Ice Aura"] = toggleIceAura
 
+-- LIGHTNING
 lightningOn = false
 lightningFolder = nil
 lightningConn = nil
@@ -1339,6 +1845,7 @@ end
 makeButton(visualsTab, "Lightning", function(btn, ind) toggleLightning(); if lightningOn then setOn(btn, ind) else setOff(btn, ind) end; notify(lightningOn and "Lightning вкл" or "Lightning выкл") end)
 bindActions["Lightning"] = toggleLightning
 
+-- SPIN
 spinOn = false
 spinConn = nil
 local function toggleSpin()
@@ -1356,6 +1863,7 @@ end
 makeButton(visualsTab, "Spin", function(btn, ind) toggleSpin(); if spinOn then setOn(btn, ind) else setOff(btn, ind) end; notify(spinOn and "Spin вкл" or "Spin выкл") end)
 bindActions["Spin"] = toggleSpin
 
+-- EXPLODE
 makeButton(visualsTab, "Explode", function(btn, ind)
     local char = LocalPlayer.Character
     local hrp = char and char:FindFirstChild("HumanoidRootPart")
@@ -1369,6 +1877,7 @@ makeButton(visualsTab, "Explode", function(btn, ind)
     notify("Explode!")
 end)
 
+-- NAME TAGS
 nameTagsOn = false
 nameTagFolder = nil
 local function createNameTags()
@@ -1443,6 +1952,7 @@ end
 makeButton(visualsTab, "Name Tags", function(btn, ind) toggleNameTags(); if nameTagsOn then setOn(btn, ind) else setOff(btn, ind) end; notify(nameTagsOn and "Name Tags вкл" or "Name Tags выкл") end)
 bindActions["Name Tags"] = toggleNameTags
 
+-- FULLBRIGHT
 fullbrightOn = false
 origAmbient = Lighting.Ambient
 origOutdoor = Lighting.OutdoorAmbient
@@ -1464,6 +1974,7 @@ makeButton(visualsTab, "Fullbright", function(btn, ind) toggleFullbright(); if f
 })
 bindActions["Fullbright"] = toggleFullbright
 
+-- CUSTOM SKY
 customSkyOn = false
 origFogColor = Lighting.FogColor
 origFogEnd = Lighting.FogEnd
@@ -1490,6 +2001,7 @@ makeButton(visualsTab, "Custom Sky", function(btn, ind) toggleCustomSky(); if cu
 })
 bindActions["Custom Sky"] = toggleCustomSky
 
+-- ASPECT RADIO
 aspectOn = false
 origAspectFOV = workspace.CurrentCamera.FieldOfView
 local function toggleAspect()
@@ -1500,6 +2012,7 @@ end
 makeButton(visualsTab, "Aspect Radio", function(btn, ind) toggleAspect(); if aspectOn then setOn(btn, ind) else setOff(btn, ind) end; notify(aspectOn and "Aspect Radio вкл" or "Aspect Radio выкл") end)
 bindActions["Aspect Radio"] = toggleAspect
 
+-- CROSSHAIR
 crosshairOn = false
 crosshairGui = nil
 local function toggleCrosshair()
@@ -1533,6 +2046,7 @@ end
 makeButton(visualsTab, "Crosshair", function(btn, ind) toggleCrosshair(); if crosshairOn then setOn(btn, ind) else setOff(btn, ind) end; notify(crosshairOn and "Crosshair вкл" or "Crosshair выкл") end)
 bindActions["Crosshair"] = toggleCrosshair
 
+-- FOV CIRCLE
 fovCircleOn = false
 fovCircleGui = nil
 local function toggleFovCircle()
@@ -1561,6 +2075,7 @@ end
 makeButton(visualsTab, "FOV Circle", function(btn, ind) toggleFovCircle(); if fovCircleOn then setOn(btn, ind) else setOff(btn, ind) end; notify(fovCircleOn and "FOV Circle вкл" or "FOV Circle выкл") end)
 bindActions["FOV Circle"] = toggleFovCircle
 
+-- STAR PARTICLES
 starParticlesOn = false
 starFolder = nil
 starConn = nil
@@ -1597,6 +2112,7 @@ end
 makeButton(visualsTab, "Star Particles", function(btn, ind) toggleStarParticles(); if starParticlesOn then setOn(btn, ind) else setOff(btn, ind) end; notify(starParticlesOn and "Stars вкл" or "Stars выкл") end)
 bindActions["Star Particles"] = toggleStarParticles
 
+-- RAINBOW CHARACTER
 rainbowCharOn = false
 rainbowCharConn = nil
 rainbowOrigColors = {}
@@ -1633,6 +2149,7 @@ end
 makeButton(visualsTab, "Rainbow Character", function(btn, ind) toggleRainbowChar(); if rainbowCharOn then setOn(btn, ind) else setOff(btn, ind) end; notify(rainbowCharOn and "Rainbow Char вкл" or "Rainbow Char выкл") end)
 bindActions["Rainbow Character"] = toggleRainbowChar
 
+-- RAINBOW TRAIL
 rainbowTrailOn = false
 rainbowTrailObj = nil
 rainbowTrailConn = nil
@@ -1676,6 +2193,1077 @@ end
 makeButton(visualsTab, "Rainbow Trail", function(btn, ind) toggleRainbowTrail(); if rainbowTrailOn then setOn(btn, ind) else setOff(btn, ind) end; notify(rainbowTrailOn and "Rainbow Trail вкл" or "Rainbow Trail выкл") end)
 bindActions["Rainbow Trail"] = toggleRainbowTrail
 
+-- TRAIL (обычный, из v1)
+trailOn = false
+trailObj = nil
+trailA0 = nil
+trailA1 = nil
+local function createTrail()
+    local char = LocalPlayer.Character
+    if not char then return end
+    local torso = char:FindFirstChild("UpperTorso") or char:FindFirstChild("Torso")
+    if not torso then return end
+    trailA0 = Instance.new("Attachment")
+    trailA0.Position = Vector3.new(0, 0.5, 0)
+    trailA0.Parent = torso
+    trailA1 = Instance.new("Attachment")
+    trailA1.Position = Vector3.new(0, -0.5, 0)
+    trailA1.Parent = torso
+    trailObj = Instance.new("Trail")
+    trailObj.Attachment0 = trailA0
+    trailObj.Attachment1 = trailA1
+    trailObj.Color = ColorSequence.new({
+        ColorSequenceKeypoint.new(0, C_ACCENT),
+        ColorSequenceKeypoint.new(1, C_ACCENT2),
+    })
+    trailObj.Transparency = NumberSequence.new({
+        NumberSequenceKeypoint.new(0, 0.2),
+        NumberSequenceKeypoint.new(1, 1),
+    })
+    trailObj.Lifetime = 1.5
+    trailObj.LightEmission = 1
+    trailObj.Parent = torso
+end
+local function removeTrail()
+    if trailObj then trailObj:Destroy() trailObj = nil end
+    if trailA0 then trailA0:Destroy() trailA0 = nil end
+    if trailA1 then trailA1:Destroy() trailA1 = nil end
+end
+local function toggleTrail()
+    trailOn = not trailOn
+    if trailOn then createTrail() else removeTrail() end
+end
+makeButton(visualsTab, "Trail", function(btn, ind) toggleTrail(); if trailOn then setOn(btn, ind) else setOff(btn, ind) end; notify(trailOn and "Trail вкл" or "Trail выкл") end)
+bindActions["Trail"] = toggleTrail
+
+-- HEAD AURA
+headAuraOn = false
+headAuraFolder = nil
+headAuraConn = nil
+local function toggleHeadAura()
+    headAuraOn = not headAuraOn
+    if headAuraOn then
+        headAuraFolder = Instance.new("Folder")
+        headAuraFolder.Parent = workspace
+        local parts = {}
+        for i = 1, 16 do
+            local part = Instance.new("Part")
+            part.Shape = Enum.PartType.Ball
+            part.Size = Vector3.new(0.2, 0.2, 0.2)
+            part.Color = C_ACCENT
+            part.Material = Enum.Material.Neon
+            part.Transparency = 0.2
+            part.Anchored = true
+            part.CanCollide = false
+            part.Parent = headAuraFolder
+            table.insert(parts, { part = part, angle = (i / 16) * math.pi * 2 })
+        end
+        headAuraConn = RunService.Heartbeat:Connect(function()
+            local c = LocalPlayer.Character
+            local head = c and c:FindFirstChild("Head")
+            if not head then return end
+            for i, data in ipairs(parts) do
+                local a = data.angle + tick() * 3
+                data.part.CFrame = head.CFrame * CFrame.new(math.cos(a) * 1.2, math.sin(tick() * 4 + i) * 0.3, math.sin(a) * 1.2)
+            end
+        end)
+    else
+        if headAuraConn then headAuraConn:Disconnect() headAuraConn = nil end
+        if headAuraFolder then headAuraFolder:Destroy() headAuraFolder = nil end
+    end
+end
+makeButton(visualsTab, "Head Aura", function(btn, ind) toggleHeadAura(); if headAuraOn then setOn(btn, ind) else setOff(btn, ind) end; notify(headAuraOn and "Head Aura вкл" or "Head Aura выкл") end)
+bindActions["Head Aura"] = toggleHeadAura
+
+-- SNOWFLAKES
+snowflakesOn = false
+snowflakesFolder = nil
+snowflakesConn = nil
+local function toggleSnowflakes()
+    snowflakesOn = not snowflakesOn
+    if snowflakesOn then
+        local char = LocalPlayer.Character
+        local hrp = char and char:FindFirstChild("HumanoidRootPart")
+        if not hrp then return end
+        snowflakesFolder = Instance.new("Folder")
+        snowflakesFolder.Parent = workspace
+        local flakes = {}
+        for i = 1, 15 do
+            local flake = Instance.new("Part")
+            flake.Size = Vector3.new(0.2, 0.2, 0.2)
+            flake.Shape = Enum.PartType.Ball
+            flake.Color = Color3.fromRGB(200, 230, 255)
+            flake.Material = Enum.Material.Neon
+            flake.Anchored = true
+            flake.CanCollide = false
+            flake.Parent = snowflakesFolder
+            table.insert(flakes, { part = flake, angle = math.random() * math.pi * 2, y = math.random() * 6, radius = math.random() * 3 + 1 })
+        end
+        snowflakesConn = RunService.Heartbeat:Connect(function(dt)
+            local c = LocalPlayer.Character
+            local h = c and c:FindFirstChild("HumanoidRootPart")
+            if not h then return end
+            for _, data in ipairs(flakes) do
+                data.y = data.y - dt * 2
+                if data.y < -3 then data.y = 6 end
+                data.angle = data.angle + dt * 0.5
+                data.part.CFrame = h.CFrame * CFrame.new(math.cos(data.angle) * data.radius, data.y, math.sin(data.angle) * data.radius)
+            end
+        end)
+    else
+        if snowflakesConn then snowflakesConn:Disconnect() snowflakesConn = nil end
+        if snowflakesFolder then snowflakesFolder:Destroy() snowflakesFolder = nil end
+    end
+end
+makeButton(visualsTab, "Snowflakes", function(btn, ind) toggleSnowflakes(); if snowflakesOn then setOn(btn, ind) else setOff(btn, ind) end; notify(snowflakesOn and "Snowflakes вкл" or "Snowflakes выкл") end)
+bindActions["Snowflakes"] = toggleSnowflakes
+
+-- MUSIC NOTES
+notesOn = false
+notesFolder = nil
+notesConn = nil
+local function toggleNotes()
+    notesOn = not notesOn
+    if notesOn then
+        local char = LocalPlayer.Character
+        local hrp = char and char:FindFirstChild("HumanoidRootPart")
+        if not hrp then return end
+        notesFolder = Instance.new("Folder")
+        notesFolder.Parent = workspace
+        local notes = {}
+        for i = 1, 10 do
+            local note = Instance.new("Part")
+            note.Size = Vector3.new(0.3, 0.3, 0.1)
+            note.Color = Color3.fromRGB(255, 200, 255)
+            note.Material = Enum.Material.Neon
+            note.Anchored = true
+            note.CanCollide = false
+            note.Parent = notesFolder
+            table.insert(notes, { part = note, angle = (i / 10) * math.pi * 2, y = 0 })
+        end
+        notesConn = RunService.Heartbeat:Connect(function(dt)
+            local c = LocalPlayer.Character
+            local h = c and c:FindFirstChild("HumanoidRootPart")
+            if not h then return end
+            for _, data in ipairs(notes) do
+                data.y = data.y + dt * 2
+                if data.y > 5 then data.y = 0 end
+                local a = data.angle + tick() * 0.5
+                data.part.CFrame = h.CFrame * CFrame.new(math.cos(a) * 2, -2 + data.y, math.sin(a) * 2)
+            end
+        end)
+    else
+        if notesConn then notesConn:Disconnect() notesConn = nil end
+        if notesFolder then notesFolder:Destroy() notesFolder = nil end
+    end
+end
+makeButton(visualsTab, "Music Notes", function(btn, ind) toggleNotes(); if notesOn then setOn(btn, ind) else setOff(btn, ind) end; notify(notesOn and "Notes вкл" or "Notes выкл") end)
+bindActions["Music Notes"] = toggleNotes
+
+-- ORBITING ORBS
+orbsOn = false
+orbsFolder = nil
+orbsConn = nil
+local function toggleOrbs()
+    orbsOn = not orbsOn
+    if orbsOn then
+        local char = LocalPlayer.Character
+        local hrp = char and char:FindFirstChild("HumanoidRootPart")
+        if not hrp then return end
+        orbsFolder = Instance.new("Folder")
+        orbsFolder.Parent = workspace
+        local parts = {}
+        for i = 1, 6 do
+            local orb = Instance.new("Part")
+            orb.Shape = Enum.PartType.Ball
+            orb.Size = Vector3.new(0.5, 0.5, 0.5)
+            orb.Color = C_ACCENT
+            orb.Material = Enum.Material.Neon
+            orb.Anchored = true
+            orb.CanCollide = false
+            orb.Parent = orbsFolder
+            table.insert(parts, { part = orb, angle = (i / 6) * math.pi * 2 })
+        end
+        orbsConn = RunService.Heartbeat:Connect(function()
+            local c = LocalPlayer.Character
+            local h = c and c:FindFirstChild("HumanoidRootPart")
+            if not h then return end
+            for _, data in ipairs(parts) do
+                local a = data.angle + tick() * 2
+                data.part.CFrame = h.CFrame * CFrame.new(math.cos(a) * 3, 0, math.sin(a) * 3)
+            end
+        end)
+    else
+        if orbsConn then orbsConn:Disconnect() orbsConn = nil end
+        if orbsFolder then orbsFolder:Destroy() orbsFolder = nil end
+    end
+end
+makeButton(visualsTab, "Orbiting Orbs", function(btn, ind) toggleOrbs(); if orbsOn then setOn(btn, ind) else setOff(btn, ind) end; notify(orbsOn and "Orbs вкл" or "Orbs выкл") end)
+bindActions["Orbiting Orbs"] = toggleOrbs
+
+-- SKULL AURA
+skullOn = false
+skullFolder = nil
+skullConn = nil
+local function toggleSkull()
+    skullOn = not skullOn
+    if skullOn then
+        local char = LocalPlayer.Character
+        local hrp = char and char:FindFirstChild("HumanoidRootPart")
+        if not hrp then return end
+        skullFolder = Instance.new("Folder")
+        skullFolder.Parent = workspace
+        local skulls = {}
+        for i = 1, 5 do
+            local skull = Instance.new("Part")
+            skull.Shape = Enum.PartType.Ball
+            skull.Size = Vector3.new(0.9, 0.9, 0.9)
+            skull.Color = Color3.fromRGB(230, 225, 210)
+            skull.Material = Enum.Material.SmoothPlastic
+            skull.Anchored = true
+            skull.CanCollide = false
+            skull.Parent = skullFolder
+            local jaw = Instance.new("Part")
+            jaw.Size = Vector3.new(0.7, 0.25, 0.7)
+            jaw.Color = Color3.fromRGB(220, 215, 200)
+            jaw.Material = Enum.Material.SmoothPlastic
+            jaw.Anchored = true
+            jaw.CanCollide = false
+            jaw.Parent = skullFolder
+            local eyeL = Instance.new("Part")
+            eyeL.Shape = Enum.PartType.Ball
+            eyeL.Size = Vector3.new(0.25, 0.25, 0.1)
+            eyeL.Color = Color3.fromRGB(255, 50, 50)
+            eyeL.Material = Enum.Material.Neon
+            eyeL.Anchored = true
+            eyeL.CanCollide = false
+            eyeL.Parent = skullFolder
+            local eyeR = Instance.new("Part")
+            eyeR.Shape = Enum.PartType.Ball
+            eyeR.Size = Vector3.new(0.25, 0.25, 0.1)
+            eyeR.Color = Color3.fromRGB(255, 50, 50)
+            eyeR.Material = Enum.Material.Neon
+            eyeR.Anchored = true
+            eyeR.CanCollide = false
+            eyeR.Parent = skullFolder
+            table.insert(skulls, { skull = skull, jaw = jaw, eyeL = eyeL, eyeR = eyeR, angle = (i / 5) * math.pi * 2 })
+        end
+        skullConn = RunService.Heartbeat:Connect(function()
+            local c = LocalPlayer.Character
+            local h = c and c:FindFirstChild("HumanoidRootPart")
+            if not h then return end
+            for _, data in ipairs(skulls) do
+                local a = data.angle + tick() * 1
+                local basePos = h.CFrame * CFrame.new(math.cos(a) * 2.8, 0.5 + math.sin(tick() * 3) * 0.4, math.sin(a) * 2.8)
+                local lookAt = CFrame.new(basePos.Position, h.Position + Vector3.new(0, 1, 0))
+                data.skull.CFrame = lookAt
+                data.jaw.CFrame = lookAt * CFrame.new(0, -0.5, 0.1)
+                data.eyeL.CFrame = lookAt * CFrame.new(-0.25, 0.1, 0.4)
+                data.eyeR.CFrame = lookAt * CFrame.new(0.25, 0.1, 0.4)
+            end
+        end)
+    else
+        if skullConn then skullConn:Disconnect() skullConn = nil end
+        if skullFolder then skullFolder:Destroy() skullFolder = nil end
+    end
+end
+makeButton(visualsTab, "Skull Aura", function(btn, ind) toggleSkull(); if skullOn then setOn(btn, ind) else setOff(btn, ind) end; notify(skullOn and "Skulls вкл" or "Skulls выкл") end)
+bindActions["Skull Aura"] = toggleSkull
+
+-- GALAXY AURA
+galaxyOn = false
+galaxyFolder = nil
+galaxyConn = nil
+local function toggleGalaxy()
+    galaxyOn = not galaxyOn
+    if galaxyOn then
+        local char = LocalPlayer.Character
+        local hrp = char and char:FindFirstChild("HumanoidRootPart")
+        if not hrp then return end
+        galaxyFolder = Instance.new("Folder")
+        galaxyFolder.Parent = workspace
+        local parts = {}
+        for i = 1, 40 do
+            local star = Instance.new("Part")
+            star.Shape = Enum.PartType.Ball
+            star.Size = Vector3.new(0.15, 0.15, 0.15)
+            star.Color = Color3.fromHSV(math.random(), 0.7, 1)
+            star.Material = Enum.Material.Neon
+            star.Anchored = true
+            star.CanCollide = false
+            star.Parent = galaxyFolder
+            table.insert(parts, { part = star, angle = math.random() * math.pi * 2, radius = math.random() * 3 + 1, y = math.random() * 6 - 3 })
+        end
+        galaxyConn = RunService.Heartbeat:Connect(function()
+            local c = LocalPlayer.Character
+            local h = c and c:FindFirstChild("HumanoidRootPart")
+            if not h then return end
+            for _, data in ipairs(parts) do
+                local a = data.angle + tick() * 0.5
+                data.part.CFrame = h.CFrame * CFrame.new(math.cos(a) * data.radius, data.y, math.sin(a) * data.radius)
+            end
+        end)
+    else
+        if galaxyConn then galaxyConn:Disconnect() galaxyConn = nil end
+        if galaxyFolder then galaxyFolder:Destroy() galaxyFolder = nil end
+    end
+end
+makeButton(visualsTab, "Galaxy Aura", function(btn, ind) toggleGalaxy(); if galaxyOn then setOn(btn, ind) else setOff(btn, ind) end; notify(galaxyOn and "Galaxy вкл" or "Galaxy выкл") end)
+bindActions["Galaxy Aura"] = toggleGalaxy
+
+-- LIGHTNING AURA
+lightningAuraOn = false
+lightningAuraFolder = nil
+lightningAuraConn = nil
+local function toggleLightningAura()
+    lightningAuraOn = not lightningAuraOn
+    if lightningAuraOn then
+        lightningAuraFolder = Instance.new("Folder")
+        lightningAuraFolder.Parent = workspace
+        lightningAuraConn = RunService.Heartbeat:Connect(function()
+            if not lightningAuraFolder then return end
+            local c = LocalPlayer.Character
+            local h = c and c:FindFirstChild("HumanoidRootPart")
+            if not h then return end
+            if math.random() < 0.2 then
+                local bolt = Instance.new("Part")
+                bolt.Size = Vector3.new(0.1, math.random(3, 8), 0.1)
+                bolt.Color = Color3.fromRGB(200, 200, 255)
+                bolt.Material = Enum.Material.Neon
+                bolt.Anchored = true
+                bolt.CanCollide = false
+                bolt.CFrame = h.CFrame * CFrame.new(math.random(-3, 3), math.random(0, 5), math.random(-3, 3))
+                bolt.Parent = lightningAuraFolder
+                task.delay(0.1, function() if bolt then bolt:Destroy() end end)
+            end
+        end)
+    else
+        if lightningAuraConn then lightningAuraConn:Disconnect() lightningAuraConn = nil end
+        if lightningAuraFolder then lightningAuraFolder:Destroy() lightningAuraFolder = nil end
+    end
+end
+makeButton(visualsTab, "Lightning Aura", function(btn, ind) toggleLightningAura(); if lightningAuraOn then setOn(btn, ind) else setOff(btn, ind) end; notify(lightningAuraOn and "Lightning Aura вкл" or "Lightning Aura выкл") end)
+bindActions["Lightning Aura"] = toggleLightningAura
+
+-- TORNADO AURA
+tornadoOn = false
+tornadoFolder = nil
+tornadoConn = nil
+local function toggleTornado()
+    tornadoOn = not tornadoOn
+    if tornadoOn then
+        local char = LocalPlayer.Character
+        local hrp = char and char:FindFirstChild("HumanoidRootPart")
+        if not hrp then return end
+        tornadoFolder = Instance.new("Folder")
+        tornadoFolder.Parent = workspace
+        local parts = {}
+        for i = 1, 30 do
+            local p = Instance.new("Part")
+            p.Size = Vector3.new(0.3, 0.3, 0.3)
+            p.Color = C_ACCENT2
+            p.Material = Enum.Material.Neon
+            p.Anchored = true
+            p.CanCollide = false
+            p.Parent = tornadoFolder
+            table.insert(parts, { part = p, angle = (i / 30) * math.pi * 2, y = (i / 30) * 6 - 3 })
+        end
+        tornadoConn = RunService.Heartbeat:Connect(function()
+            local c = LocalPlayer.Character
+            local h = c and c:FindFirstChild("HumanoidRootPart")
+            if not h then return end
+            for _, data in ipairs(parts) do
+                local a = data.angle + tick() * 3
+                local r = 1 + (data.y + 3) / 6 * 2
+                data.part.CFrame = h.CFrame * CFrame.new(math.cos(a) * r, data.y, math.sin(a) * r)
+            end
+        end)
+    else
+        if tornadoConn then tornadoConn:Disconnect() tornadoConn = nil end
+        if tornadoFolder then tornadoFolder:Destroy() tornadoFolder = nil end
+    end
+end
+makeButton(visualsTab, "Tornado Aura", function(btn, ind) toggleTornado(); if tornadoOn then setOn(btn, ind) else setOff(btn, ind) end; notify(tornadoOn and "Tornado вкл" or "Tornado выкл") end)
+bindActions["Tornado Aura"] = toggleTornado
+
+-- FIRE TRAIL
+fireTrailOn = false
+fireTrailFolder = nil
+fireTrailConn = nil
+local function toggleFireTrail()
+    fireTrailOn = not fireTrailOn
+    if fireTrailOn then
+        fireTrailFolder = Instance.new("Folder")
+        fireTrailFolder.Parent = workspace
+        local lastPos = nil
+        if fireTrailConn then fireTrailConn:Disconnect() end
+        fireTrailConn = RunService.Heartbeat:Connect(function()
+            local c = LocalPlayer.Character
+            local h = c and c:FindFirstChild("HumanoidRootPart")
+            if not h then return end
+            if lastPos and (h.Position - lastPos).Magnitude < 0.5 then return end
+            lastPos = h.Position
+            local fire = Instance.new("Part")
+            fire.Size = Vector3.new(0.5, 0.5, 0.5)
+            fire.Shape = Enum.PartType.Ball
+            fire.Color = Color3.fromRGB(255, 100, 0)
+            fire.Material = Enum.Material.Neon
+            fire.Anchored = true
+            fire.CanCollide = false
+            fire.Position = h.Position - Vector3.new(0, 2.5, 0)
+            fire.Parent = fireTrailFolder
+            TweenService:Create(fire, TweenInfo.new(1.5), {Size = Vector3.new(0.1, 0.1, 0.1), Transparency = 1, Position = fire.Position + Vector3.new(0, 2, 0)}):Play()
+            task.delay(1.5, function() if fire then fire:Destroy() end end)
+        end)
+    else
+        if fireTrailConn then fireTrailConn:Disconnect() fireTrailConn = nil end
+        if fireTrailFolder then fireTrailFolder:Destroy() fireTrailFolder = nil end
+    end
+end
+makeButton(visualsTab, "Fire Trail", function(btn, ind) toggleFireTrail(); if fireTrailOn then setOn(btn, ind) else setOff(btn, ind) end; notify(fireTrailOn and "Fire Trail вкл" or "Fire Trail выкл") end)
+bindActions["Fire Trail"] = toggleFireTrail
+
+-- ICE TRAIL
+iceTrailOn = false
+iceTrailFolder = nil
+iceTrailConn = nil
+local function toggleIceTrail()
+    iceTrailOn = not iceTrailOn
+    if iceTrailOn then
+        iceTrailFolder = Instance.new("Folder")
+        iceTrailFolder.Parent = workspace
+        local lastPos = nil
+        if iceTrailConn then iceTrailConn:Disconnect() end
+        iceTrailConn = RunService.Heartbeat:Connect(function()
+            local c = LocalPlayer.Character
+            local h = c and c:FindFirstChild("HumanoidRootPart")
+            if not h then return end
+            if lastPos and (h.Position - lastPos).Magnitude < 0.5 then return end
+            lastPos = h.Position
+            local ice = Instance.new("Part")
+            ice.Size = Vector3.new(0.5, 0.5, 0.5)
+            ice.Shape = Enum.PartType.Ball
+            ice.Color = Color3.fromRGB(150, 220, 255)
+            ice.Material = Enum.Material.Ice
+            ice.Anchored = true
+            ice.CanCollide = false
+            ice.Position = h.Position - Vector3.new(0, 2.5, 0)
+            ice.Parent = iceTrailFolder
+            TweenService:Create(ice, TweenInfo.new(2), {Size = Vector3.new(0.1, 0.1, 0.1), Transparency = 1}):Play()
+            task.delay(2, function() if ice then ice:Destroy() end end)
+        end)
+    else
+        if iceTrailConn then iceTrailConn:Disconnect() iceTrailConn = nil end
+        if iceTrailFolder then iceTrailFolder:Destroy() iceTrailFolder = nil end
+    end
+end
+makeButton(visualsTab, "Ice Trail", function(btn, ind) toggleIceTrail(); if iceTrailOn then setOn(btn, ind) else setOff(btn, ind) end; notify(iceTrailOn and "Ice Trail вкл" or "Ice Trail выкл") end)
+bindActions["Ice Trail"] = toggleIceTrail
+
+-- FOOTSTEPS
+footstepsOn = false
+footstepsFolder = nil
+footstepsConn = nil
+local function toggleFootsteps()
+    footstepsOn = not footstepsOn
+    if footstepsOn then
+        footstepsFolder = Instance.new("Folder")
+        footstepsFolder.Parent = workspace
+        local lastPos = nil
+        if footstepsConn then footstepsConn:Disconnect() end
+        footstepsConn = RunService.Heartbeat:Connect(function()
+            local c = LocalPlayer.Character
+            local h = c and c:FindFirstChild("HumanoidRootPart")
+            if not h then return end
+            if lastPos and (h.Position - lastPos).Magnitude < 3 then return end
+            lastPos = h.Position
+            local foot = Instance.new("Part")
+            foot.Size = Vector3.new(0.8, 0.1, 0.8)
+            foot.Shape = Enum.PartType.Cylinder
+            foot.Color = C_ACCENT
+            foot.Material = Enum.Material.Neon
+            foot.Transparency = 0.3
+            foot.Anchored = true
+            foot.CanCollide = false
+            foot.Position = h.Position - Vector3.new(0, 2.8, 0)
+            foot.Orientation = Vector3.new(0, 0, 90)
+            foot.Parent = footstepsFolder
+            TweenService:Create(foot, TweenInfo.new(1.5), {Transparency = 1}):Play()
+            task.delay(1.5, function() if foot then foot:Destroy() end end)
+        end)
+    else
+        if footstepsConn then footstepsConn:Disconnect() footstepsConn = nil end
+        if footstepsFolder then footstepsFolder:Destroy() footstepsFolder = nil end
+    end
+end
+makeButton(visualsTab, "Footsteps", function(btn, ind) toggleFootsteps(); if footstepsOn then setOn(btn, ind) else setOff(btn, ind) end; notify(footstepsOn and "Footsteps вкл" or "Footsteps выкл") end)
+bindActions["Footsteps"] = toggleFootsteps
+
+-- ============================================
+-- 12 КРУТЫХ ВИЗУАЛОВ
+-- ============================================
+
+-- BLACK HOLE
+blackHoleOn = false
+blackHoleFolder = nil
+blackHoleConn = nil
+local function toggleBlackHole()
+    blackHoleOn = not blackHoleOn
+    if blackHoleOn then
+        local char = LocalPlayer.Character
+        local head = char and char:FindFirstChild("Head")
+        if not head then return end
+        blackHoleFolder = Instance.new("Folder")
+        blackHoleFolder.Parent = char
+        local core = Instance.new("Part")
+        core.Shape = Enum.PartType.Ball
+        core.Size = Vector3.new(1.5, 1.5, 1.5)
+        core.Color = Color3.fromRGB(0, 0, 0)
+        core.Material = Enum.Material.SmoothPlastic
+        core.Anchored = false
+        core.CanCollide = false
+        core.Massless = true
+        core.CFrame = head.CFrame * CFrame.new(0, 3, 0)
+        local w = Instance.new("WeldConstraint")
+        w.Part0 = head
+        w.Part1 = core
+        w.Parent = core
+        core.Parent = blackHoleFolder
+        local diskParts = {}
+        for ring = 1, 3 do
+            for i = 1, 24 do
+                local p = Instance.new("Part")
+                p.Size = Vector3.new(0.4, 0.1, 0.2)
+                p.Color = Color3.fromHSV((ring / 4) + 0.75, 0.8, 1)
+                p.Material = Enum.Material.Neon
+                p.Transparency = 0.2
+                p.Anchored = false
+                p.CanCollide = false
+                p.Massless = true
+                p.CFrame = head.CFrame * CFrame.new(0, 3, 0)
+                local wp = Instance.new("WeldConstraint")
+                wp.Part0 = head
+                wp.Part1 = p
+                wp.Parent = p
+                p.Parent = blackHoleFolder
+                table.insert(diskParts, { part = p, angle = (i / 24) * math.pi * 2, ring = ring })
+            end
+        end
+        local light = Instance.new("PointLight")
+        light.Color = Color3.fromRGB(150, 80, 255)
+        light.Brightness = 5
+        light.Range = 12
+        light.Parent = core
+        if blackHoleConn then blackHoleConn:Disconnect() end
+        blackHoleConn = RunService.Heartbeat:Connect(function()
+            local c = LocalPlayer.Character
+            local h = c and c:FindFirstChild("Head")
+            if not h or not core.Parent then return end
+            core.CFrame = h.CFrame * CFrame.new(0, 3, 0) * CFrame.Angles(tick() * 0.5, tick() * 0.8, 0)
+            for _, data in ipairs(diskParts) do
+                local speed = 5 - data.ring * 0.5
+                local a = data.angle + tick() * speed
+                local r = data.ring * 0.8 + 0.6
+                data.part.CFrame = h.CFrame * CFrame.new(0, 3, 0) * CFrame.new(math.cos(a) * r, math.sin(tick() * 3 + data.ring) * 0.15, math.sin(a) * r) * CFrame.Angles(0, a, math.rad(90))
+            end
+        end)
+    else
+        if blackHoleConn then blackHoleConn:Disconnect() blackHoleConn = nil end
+        if blackHoleFolder then blackHoleFolder:Destroy() blackHoleFolder = nil end
+    end
+end
+makeButton(visualsTab, "Black Hole", function(btn, ind) toggleBlackHole(); if blackHoleOn then setOn(btn, ind) else setOff(btn, ind) end; notify(blackHoleOn and "Black Hole вкл" or "Black Hole выкл") end)
+bindActions["Black Hole"] = toggleBlackHole
+
+-- SOUL FLAME
+soulFlameOn = false
+soulFlameFolder = nil
+soulFlameConn = nil
+local function toggleSoulFlame()
+    soulFlameOn = not soulFlameOn
+    if soulFlameOn then
+        soulFlameFolder = Instance.new("Folder")
+        soulFlameFolder.Parent = workspace
+        soulFlameConn = RunService.Heartbeat:Connect(function()
+            local c = LocalPlayer.Character
+            local h = c and c:FindFirstChild("HumanoidRootPart")
+            if not h then return end
+            if math.random() < 0.6 then
+                local flame = Instance.new("Part")
+                flame.Shape = Enum.PartType.Ball
+                flame.Size = Vector3.new(math.random(3, 6) / 10, math.random(5, 10) / 10, math.random(3, 6) / 10)
+                flame.Color = Color3.fromRGB(100, 150, 255)
+                flame.Material = Enum.Material.Neon
+                flame.Transparency = 0.2
+                flame.Anchored = true
+                flame.CanCollide = false
+                local a = math.random() * math.pi * 2
+                local r = math.random() * 2
+                flame.Position = h.Position + Vector3.new(math.cos(a) * r, math.random(-3, 3), math.sin(a) * r)
+                flame.Parent = soulFlameFolder
+                local endPos = flame.Position + Vector3.new(0, 3, 0)
+                TweenService:Create(flame, TweenInfo.new(1.2), {Position = endPos, Size = Vector3.new(0.1, 0.1, 0.1), Transparency = 1}):Play()
+                task.delay(1.2, function() if flame then flame:Destroy() end end)
+            end
+        end)
+    else
+        if soulFlameConn then soulFlameConn:Disconnect() soulFlameConn = nil end
+        if soulFlameFolder then soulFlameFolder:Destroy() soulFlameFolder = nil end
+    end
+end
+makeButton(visualsTab, "Soul Flame", function(btn, ind) toggleSoulFlame(); if soulFlameOn then setOn(btn, ind) else setOff(btn, ind) end; notify(soulFlameOn and "Soul Flame вкл" or "Soul Flame выкл") end)
+bindActions["Soul Flame"] = toggleSoulFlame
+
+-- ENERGY BEAM
+energyBeamOn = false
+energyBeamPart = nil
+energyBeamCore = nil
+energyBeamConn = nil
+local function toggleEnergyBeam()
+    energyBeamOn = not energyBeamOn
+    if energyBeamOn then
+        local char = LocalPlayer.Character
+        local hrp = char and char:FindFirstChild("HumanoidRootPart")
+        if not hrp then return end
+        energyBeamPart = Instance.new("Part")
+        energyBeamPart.Size = Vector3.new(1.5, 60, 1.5)
+        energyBeamPart.Color = C_ACCENT
+        energyBeamPart.Material = Enum.Material.Neon
+        energyBeamPart.Transparency = 0.4
+        energyBeamPart.Anchored = false
+        energyBeamPart.CanCollide = false
+        energyBeamPart.Massless = true
+        energyBeamPart.CFrame = hrp.CFrame * CFrame.new(0, 30, 0)
+        local w = Instance.new("WeldConstraint")
+        w.Part0 = hrp
+        w.Part1 = energyBeamPart
+        w.Parent = energyBeamPart
+        energyBeamPart.Parent = char
+        energyBeamCore = Instance.new("Part")
+        energyBeamCore.Shape = Enum.PartType.Ball
+        energyBeamCore.Size = Vector3.new(2, 2, 2)
+        energyBeamCore.Color = C_ACCENT2
+        energyBeamCore.Material = Enum.Material.Neon
+        energyBeamCore.Anchored = false
+        energyBeamCore.CanCollide = false
+        energyBeamCore.Massless = true
+        energyBeamCore.CFrame = hrp.CFrame * CFrame.new(0, 3, 0)
+        local w2 = Instance.new("WeldConstraint")
+        w2.Part0 = hrp
+        w2.Part1 = energyBeamCore
+        w2.Parent = energyBeamCore
+        energyBeamCore.Parent = char
+        local light = Instance.new("PointLight")
+        light.Color = C_ACCENT
+        light.Brightness = 8
+        light.Range = 20
+        light.Parent = energyBeamCore
+        if energyBeamConn then energyBeamConn:Disconnect() end
+        energyBeamConn = RunService.Heartbeat:Connect(function()
+            if energyBeamPart then
+                local scale = 1 + math.sin(tick() * 8) * 0.15
+                energyBeamPart.Size = Vector3.new(1.5 * scale, 60, 1.5 * scale)
+                energyBeamPart.Transparency = 0.3 + math.sin(tick() * 5) * 0.1
+            end
+        end)
+    else
+        if energyBeamConn then energyBeamConn:Disconnect() energyBeamConn = nil end
+        if energyBeamPart then energyBeamPart:Destroy() energyBeamPart = nil end
+        if energyBeamCore then energyBeamCore:Destroy() energyBeamCore = nil end
+    end
+end
+makeButton(visualsTab, "Energy Beam", function(btn, ind) toggleEnergyBeam(); if energyBeamOn then setOn(btn, ind) else setOff(btn, ind) end; notify(energyBeamOn and "Energy Beam вкл" or "Energy Beam выкл") end)
+bindActions["Energy Beam"] = toggleEnergyBeam
+
+-- AURA WINGS
+auraWingsOn = false
+auraWingsFolder = nil
+auraWingsConn = nil
+local function toggleAuraWings()
+    auraWingsOn = not auraWingsOn
+    if auraWingsOn then
+        auraWingsFolder = Instance.new("Folder")
+        auraWingsFolder.Parent = workspace
+        local wings = {}
+        for side = -1, 1, 2 do
+            for i = 1, 6 do
+                local p = Instance.new("Part")
+                p.Size = Vector3.new(0.3, 3 + i * 0.3, 0.15)
+                p.Color = C_ACCENT
+                p.Material = Enum.Material.Neon
+                p.Transparency = 0.2
+                p.Anchored = true
+                p.CanCollide = false
+                p.Parent = auraWingsFolder
+                table.insert(wings, { part = p, side = side, i = i })
+            end
+        end
+        if auraWingsConn then auraWingsConn:Disconnect() end
+        auraWingsConn = RunService.Heartbeat:Connect(function()
+            local c = LocalPlayer.Character
+            local t = c and (c:FindFirstChild("UpperTorso") or c:FindFirstChild("Torso"))
+            if not t then return end
+            for _, data in ipairs(wings) do
+                local flap = math.sin(tick() * 3 + data.i * 0.4) * 20
+                local spread = data.i * 0.6
+                local angle = math.rad(60 + flap)
+                data.part.CFrame = t.CFrame * CFrame.new(data.side * spread * math.cos(angle), spread * 0.3, 1) * CFrame.Angles(0, 0, data.side * (angle - math.rad(45)))
+                data.part.Color = Color3.fromHSV((tick() * 0.4 + data.i * 0.1) % 1, 0.7, 1)
+            end
+        end)
+    else
+        if auraWingsConn then auraWingsConn:Disconnect() auraWingsConn = nil end
+        if auraWingsFolder then auraWingsFolder:Destroy() auraWingsFolder = nil end
+    end
+end
+makeButton(visualsTab, "Aura Wings", function(btn, ind) toggleAuraWings(); if auraWingsOn then setOn(btn, ind) else setOff(btn, ind) end; notify(auraWingsOn and "Aura Wings вкл" or "Aura Wings выкл") end)
+bindActions["Aura Wings"] = toggleAuraWings
+
+-- RAINBOW WAVE
+rainbowWaveOn = false
+rainbowWaveFolder = nil
+rainbowWaveConn = nil
+local function toggleRainbowWave()
+    rainbowWaveOn = not rainbowWaveOn
+    if rainbowWaveOn then
+        rainbowWaveFolder = Instance.new("Folder")
+        rainbowWaveFolder.Parent = workspace
+        local waves = {}
+        for i = 1, 36 do
+            local p = Instance.new("Part")
+            p.Size = Vector3.new(0.6, 0.15, 0.3)
+            p.Material = Enum.Material.Neon
+            p.Transparency = 0.3
+            p.Anchored = true
+            p.CanCollide = false
+            p.Parent = rainbowWaveFolder
+            table.insert(waves, { part = p, angle = (i / 36) * math.pi * 2 })
+        end
+        if rainbowWaveConn then rainbowWaveConn:Disconnect() end
+        rainbowWaveConn = RunService.Heartbeat:Connect(function()
+            local c = LocalPlayer.Character
+            local h = c and c:FindFirstChild("HumanoidRootPart")
+            if not h then return end
+            local groundY = h.Position.Y - 3
+            for i, data in ipairs(waves) do
+                local a = data.angle + tick() * 0.3
+                local wave = math.sin(tick() * 3 + i * 0.2) * 0.5
+                local r = 3 + wave
+                data.part.CFrame = CFrame.new(h.Position.X + math.cos(a) * r, groundY + wave * 0.5, h.Position.Z + math.sin(a) * r) * CFrame.Angles(0, -a, 0)
+                data.part.Color = Color3.fromHSV(((tick() * 0.5) + i / 36) % 1, 0.9, 1)
+            end
+        end)
+    else
+        if rainbowWaveConn then rainbowWaveConn:Disconnect() rainbowWaveConn = nil end
+        if rainbowWaveFolder then rainbowWaveFolder:Destroy() rainbowWaveFolder = nil end
+    end
+end
+makeButton(visualsTab, "Rainbow Wave", function(btn, ind) toggleRainbowWave(); if rainbowWaveOn then setOn(btn, ind) else setOff(btn, ind) end; notify(rainbowWaveOn and "Rainbow Wave вкл" or "Rainbow Wave выкл") end)
+bindActions["Rainbow Wave"] = toggleRainbowWave
+
+-- FIRE RING
+fireRingOn = false
+fireRingFolder = nil
+fireRingConn = nil
+local function toggleFireRing()
+    fireRingOn = not fireRingOn
+    if fireRingOn then
+        fireRingFolder = Instance.new("Folder")
+        fireRingFolder.Parent = workspace
+        local parts = {}
+        for i = 1, 30 do
+            local p = Instance.new("Part")
+            p.Shape = Enum.PartType.Ball
+            p.Size = Vector3.new(0.5, 0.5, 0.5)
+            p.Color = Color3.fromRGB(255, 100, 0)
+            p.Material = Enum.Material.Neon
+            p.Transparency = 0.2
+            p.Anchored = true
+            p.CanCollide = false
+            p.Parent = fireRingFolder
+            table.insert(parts, { part = p, angle = (i / 30) * math.pi * 2 })
+        end
+        if fireRingConn then fireRingConn:Disconnect() end
+        fireRingConn = RunService.Heartbeat:Connect(function()
+            local c = LocalPlayer.Character
+            local h = c and c:FindFirstChild("HumanoidRootPart")
+            if not h then return end
+            local tilt = math.sin(tick() * 0.5) * 30
+            for i, data in ipairs(parts) do
+                local a = data.angle + tick() * 3
+                local r = 2.5
+                data.part.CFrame = h.CFrame * CFrame.new(math.cos(a) * r, -2.5, math.sin(a) * r) * CFrame.Angles(0, 0, math.rad(tilt))
+                data.part.Color = Color3.fromHSV(0.02 + math.sin(tick() * 5 + i) * 0.05, 1, 1)
+            end
+        end)
+    else
+        if fireRingConn then fireRingConn:Disconnect() fireRingConn = nil end
+        if fireRingFolder then fireRingFolder:Destroy() fireRingFolder = nil end
+    end
+end
+makeButton(visualsTab, "Fire Ring", function(btn, ind) toggleFireRing(); if fireRingOn then setOn(btn, ind) else setOff(btn, ind) end; notify(fireRingOn and "Fire Ring вкл" or "Fire Ring выкл") end)
+bindActions["Fire Ring"] = toggleFireRing
+
+-- ICE CRYSTALS
+iceCrystalsOn = false
+iceCrystalsFolder = nil
+iceCrystalsConn = nil
+local function toggleIceCrystals()
+    iceCrystalsOn = not iceCrystalsOn
+    if iceCrystalsOn then
+        iceCrystalsFolder = Instance.new("Folder")
+        iceCrystalsFolder.Parent = workspace
+        local crystals = {}
+        for i = 1, 10 do
+            local crystal = Instance.new("Part")
+            crystal.Size = Vector3.new(0.3, 0.8, 0.3)
+            crystal.Color = Color3.fromRGB(150, 220, 255)
+            crystal.Material = Enum.Material.Ice
+            crystal.Transparency = 0.2
+            crystal.Anchored = true
+            crystal.CanCollide = false
+            crystal.Parent = iceCrystalsFolder
+            table.insert(crystals, { part = crystal, angle = (i / 10) * math.pi * 2, y = math.random() * 4 })
+        end
+        if iceCrystalsConn then iceCrystalsConn:Disconnect() end
+        iceCrystalsConn = RunService.Heartbeat:Connect(function(dt)
+            local c = LocalPlayer.Character
+            local h = c and c:FindFirstChild("HumanoidRootPart")
+            if not h then return end
+            for _, data in ipairs(crystals) do
+                data.y = data.y + dt * 0.5
+                if data.y > 5 then data.y = 0 end
+                local a = data.angle + tick() * 1
+                data.part.CFrame = h.CFrame * CFrame.new(math.cos(a) * 2.5, -2 + data.y, math.sin(a) * 2.5) * CFrame.Angles(tick() * 2, a, tick() * 1.5)
+            end
+        end)
+    else
+        if iceCrystalsConn then iceCrystalsConn:Disconnect() iceCrystalsConn = nil end
+        if iceCrystalsFolder then iceCrystalsFolder:Destroy() iceCrystalsFolder = nil end
+    end
+end
+makeButton(visualsTab, "Ice Crystals", function(btn, ind) toggleIceCrystals(); if iceCrystalsOn then setOn(btn, ind) else setOff(btn, ind) end; notify(iceCrystalsOn and "Ice Crystals вкл" or "Ice Crystals выкл") end)
+bindActions["Ice Crystals"] = toggleIceCrystals
+
+-- SHADOW AURA
+shadowOn = false
+shadowFolder = nil
+shadowConn = nil
+local function toggleShadow()
+    shadowOn = not shadowOn
+    if shadowOn then
+        shadowFolder = Instance.new("Folder")
+        shadowFolder.Parent = workspace
+        local parts = {}
+        for i = 1, 25 do
+            local p = Instance.new("Part")
+            p.Size = Vector3.new(0.4, 0.8, 0.4)
+            p.Color = Color3.fromRGB(30, 0, 50)
+            p.Material = Enum.Material.Neon
+            p.Transparency = 0.4
+            p.Anchored = true
+            p.CanCollide = false
+            p.Parent = shadowFolder
+            table.insert(parts, { part = p, angle = (i / 25) * math.pi * 2, y = math.random() * 4 })
+        end
+        if shadowConn then shadowConn:Disconnect() end
+        shadowConn = RunService.Heartbeat:Connect(function(dt)
+            local c = LocalPlayer.Character
+            local h = c and c:FindFirstChild("HumanoidRootPart")
+            if not h then return end
+            for _, data in ipairs(parts) do
+                data.y = data.y + dt * 2
+                if data.y > 5 then data.y = 0 end
+                local a = data.angle + tick() * 2
+                data.part.CFrame = h.CFrame * CFrame.new(math.cos(a) * 2.5, -3 + data.y, math.sin(a) * 2.5) * CFrame.Angles(math.sin(tick() * 3) * 0.5, a, math.cos(tick() * 3) * 0.5)
+            end
+        end)
+    else
+        if shadowConn then shadowConn:Disconnect() shadowConn = nil end
+        if shadowFolder then shadowFolder:Destroy() shadowFolder = nil end
+    end
+end
+makeButton(visualsTab, "Shadow Aura", function(btn, ind) toggleShadow(); if shadowOn then setOn(btn, ind) else setOff(btn, ind) end; notify(shadowOn and "Shadow Aura вкл" or "Shadow Aura выкл") end)
+bindActions["Shadow Aura"] = toggleShadow
+
+-- GOLDEN AURA
+goldenOn = false
+goldenFolder = nil
+goldenConn = nil
+local function toggleGolden()
+    goldenOn = not goldenOn
+    if goldenOn then
+        goldenFolder = Instance.new("Folder")
+        goldenFolder.Parent = workspace
+        local parts = {}
+        for i = 1, 24 do
+            local p = Instance.new("Part")
+            p.Shape = Enum.PartType.Ball
+            p.Size = Vector3.new(0.3, 0.3, 0.3)
+            p.Color = Color3.fromRGB(255, 215, 0)
+            p.Material = Enum.Material.Neon
+            p.Transparency = 0.15
+            p.Anchored = true
+            p.CanCollide = false
+            p.Parent = goldenFolder
+            table.insert(parts, { part = p, angle = (i / 24) * math.pi * 2, y = math.random() * 5 })
+        end
+        if goldenConn then goldenConn:Disconnect() end
+        goldenConn = RunService.Heartbeat:Connect(function(dt)
+            local c = LocalPlayer.Character
+            local h = c and c:FindFirstChild("HumanoidRootPart")
+            if not h then return end
+            for _, data in ipairs(parts) do
+                data.y = data.y + dt * 1.5
+                if data.y > 6 then data.y = 0 end
+                local a = data.angle + tick() * 1.5
+                local r = 2.5 + math.sin(tick() * 2 + data.y) * 0.3
+                data.part.CFrame = h.CFrame * CFrame.new(math.cos(a) * r, -3 + data.y, math.sin(a) * r)
+            end
+        end)
+    else
+        if goldenConn then goldenConn:Disconnect() goldenConn = nil end
+        if goldenFolder then goldenFolder:Destroy() goldenFolder = nil end
+    end
+end
+makeButton(visualsTab, "Golden Aura", function(btn, ind) toggleGolden(); if goldenOn then setOn(btn, ind) else setOff(btn, ind) end; notify(goldenOn and "Golden Aura вкл" or "Golden Aura выкл") end)
+bindActions["Golden Aura"] = toggleGolden
+
+-- LASER EYES
+laserEyesOn = false
+laserEyesFolder = nil
+laserEyesConn = nil
+local function toggleLaserEyes()
+    laserEyesOn = not laserEyesOn
+    if laserEyesOn then
+        laserEyesFolder = Instance.new("Folder")
+        laserEyesFolder.Parent = workspace
+        local lasers = {}
+        for _, side in ipairs({-0.15, 0.15}) do
+            local p = Instance.new("Part")
+            p.Size = Vector3.new(0.1, 0.1, 50)
+            p.Color = Color3.fromRGB(255, 0, 0)
+            p.Material = Enum.Material.Neon
+            p.Transparency = 0.3
+            p.Anchored = true
+            p.CanCollide = false
+            p.Parent = laserEyesFolder
+            table.insert(lasers, { part = p, side = side })
+        end
+        if laserEyesConn then laserEyesConn:Disconnect() end
+        laserEyesConn = RunService.Heartbeat:Connect(function()
+            local c = LocalPlayer.Character
+            local head = c and c:FindFirstChild("Head")
+            if not head then return end
+            local cam = workspace.CurrentCamera
+            for _, data in ipairs(lasers) do
+                local startCF = head.CFrame * CFrame.new(data.side, 0.3, -0.6)
+                local dir = cam.CFrame.LookVector
+                data.part.CFrame = CFrame.new(startCF.Position + dir * 25, startCF.Position + dir * 50)
+                data.part.Size = Vector3.new(0.1 + math.sin(tick() * 20) * 0.03, 0.1 + math.sin(tick() * 20) * 0.03, 50)
+            end
+        end)
+    else
+        if laserEyesConn then laserEyesConn:Disconnect() laserEyesConn = nil end
+        if laserEyesFolder then laserEyesFolder:Destroy() laserEyesFolder = nil end
+    end
+end
+makeButton(visualsTab, "Laser Eyes", function(btn, ind) toggleLaserEyes(); if laserEyesOn then setOn(btn, ind) else setOff(btn, ind) end; notify(laserEyesOn and "Laser Eyes вкл" or "Laser Eyes выкл") end)
+bindActions["Laser Eyes"] = toggleLaserEyes
+
+-- SNOW AURA
+snowAuraOn = false
+snowAuraFolder = nil
+snowAuraConn = nil
+local function toggleSnowAura()
+    snowAuraOn = not snowAuraOn
+    if snowAuraOn then
+        snowAuraFolder = Instance.new("Folder")
+        snowAuraFolder.Parent = workspace
+        local flakes = {}
+        for i = 1, 20 do
+            local flake = Instance.new("Part")
+            flake.Size = Vector3.new(0.25, 0.05, 0.25)
+            flake.Color = Color3.fromRGB(220, 240, 255)
+            flake.Material = Enum.Material.Neon
+            flake.Transparency = 0.2
+            flake.Anchored = true
+            flake.CanCollide = false
+            flake.Parent = snowAuraFolder
+            table.insert(flakes, { part = flake, angle = math.random() * math.pi * 2, r = 1.5 + math.random() * 2, y = math.random() * 6, rot = math.random() * 360 })
+        end
+        if snowAuraConn then snowAuraConn:Disconnect() end
+        snowAuraConn = RunService.Heartbeat:Connect(function(dt)
+            local c = LocalPlayer.Character
+            local h = c and c:FindFirstChild("HumanoidRootPart")
+            if not h then return end
+            for _, data in ipairs(flakes) do
+                data.y = data.y - dt * 1.5
+                if data.y < -3 then data.y = 6 end
+                data.angle = data.angle + dt * 0.5
+                data.rot = data.rot + dt * 120
+                data.part.CFrame = h.CFrame * CFrame.new(math.cos(data.angle) * data.r, data.y, math.sin(data.angle) * data.r) * CFrame.Angles(0, math.rad(data.rot), 0)
+            end
+        end)
+    else
+        if snowAuraConn then snowAuraConn:Disconnect() snowAuraConn = nil end
+        if snowAuraFolder then snowAuraFolder:Destroy() snowAuraFolder = nil end
+    end
+end
+makeButton(visualsTab, "Snow Aura", function(btn, ind) toggleSnowAura(); if snowAuraOn then setOn(btn, ind) else setOff(btn, ind) end; notify(snowAuraOn and "Snow Aura вкл" or "Snow Aura выкл") end)
+bindActions["Snow Aura"] = toggleSnowAura
+
+-- GALAXY ORBIT
+galaxyOrbitOn = false
+galaxyOrbitFolder = nil
+galaxyOrbitConn = nil
+local function toggleGalaxyOrbit()
+    galaxyOrbitOn = not galaxyOrbitOn
+    if galaxyOrbitOn then
+        galaxyOrbitFolder = Instance.new("Folder")
+        galaxyOrbitFolder.Parent = workspace
+        local planets = {}
+        for i = 1, 5 do
+            local planet = Instance.new("Part")
+            planet.Shape = Enum.PartType.Ball
+            planet.Size = Vector3.new(0.5 + i * 0.1, 0.5 + i * 0.1, 0.5 + i * 0.1)
+            planet.Color = Color3.fromHSV(i / 5, 0.7, 1)
+            planet.Material = Enum.Material.Neon
+            planet.Anchored = true
+            planet.CanCollide = false
+            planet.Parent = galaxyOrbitFolder
+            local ring = Instance.new("Part")
+            ring.Shape = Enum.PartType.Cylinder
+            ring.Size = Vector3.new(0.05, 1 + i * 0.2, 1 + i * 0.2)
+            ring.Color = Color3.fromHSV(i / 5, 0.5, 1)
+            ring.Material = Enum.Material.Neon
+            ring.Transparency = 0.4
+            ring.Anchored = true
+            ring.CanCollide = false
+            ring.Parent = galaxyOrbitFolder
+            table.insert(planets, { planet = planet, ring = ring, angle = (i / 5) * math.pi * 2, dist = 3 + i * 0.3, yOffset = (i - 3) * 0.5 })
+        end
+        if galaxyOrbitConn then galaxyOrbitConn:Disconnect() end
+        galaxyOrbitConn = RunService.Heartbeat:Connect(function()
+            local c = LocalPlayer.Character
+            local h = c and c:FindFirstChild("HumanoidRootPart")
+            if not h then return end
+            for _, data in ipairs(planets) do
+                local a = data.angle + tick() * (1 + data.dist * 0.1)
+                local pos = h.Position + Vector3.new(math.cos(a) * data.dist, data.yOffset, math.sin(a) * data.dist)
+                data.planet.CFrame = CFrame.new(pos) * CFrame.Angles(tick() * 2, tick() * 2, 0)
+                data.ring.CFrame = CFrame.new(pos) * CFrame.Angles(math.rad(70), tick() * 1.5, 0)
+            end
+        end)
+    else
+        if galaxyOrbitConn then galaxyOrbitConn:Disconnect() galaxyOrbitConn = nil end
+        if galaxyOrbitFolder then galaxyOrbitFolder:Destroy() galaxyOrbitFolder = nil end
+    end
+end
+makeButton(visualsTab, "Galaxy Orbit", function(btn, ind) toggleGalaxyOrbit(); if galaxyOrbitOn then setOn(btn, ind) else setOff(btn, ind) end; notify(galaxyOrbitOn and "Galaxy Orbit вкл" or "Galaxy Orbit выкл") end)
+bindActions["Galaxy Orbit"] = toggleGalaxyOrbit
+
+-- ANGEL WINGS
 wingsOn = false
 wingsFolder = nil
 wingsConnection = nil
@@ -1773,637 +3361,16 @@ makeButton(visualsTab, "Angel Wings", function(btn, ind) toggleWings(); if wings
 })
 bindActions["Angel Wings"] = toggleWings
 
+-- 🔻 ПРОДОЛЖЕНИЕ В ЧАСТИ 3/3 🔻-- ============================================
+-- KOLBASKA HUB v3 FINAL — ЧАСТЬ 3/3
+-- Exploits, Scripts, Fun, Dev, Settings, Восстановление
 -- ============================================
--- 12 КРУТЫХ ВИЗУАЛОВ
+
 -- ============================================
-
-blackHoleOn = false
-blackHoleFolder = nil
-blackHoleConn = nil
-local function toggleBlackHole()
-    blackHoleOn = not blackHoleOn
-    if blackHoleOn then
-        local char = LocalPlayer.Character
-        local head = char and char:FindFirstChild("Head")
-        if not head then return end
-        blackHoleFolder = Instance.new("Folder")
-        blackHoleFolder.Parent = char
-        local core = Instance.new("Part")
-        core.Shape = Enum.PartType.Ball
-        core.Size = Vector3.new(1.5, 1.5, 1.5)
-        core.Color = Color3.fromRGB(0, 0, 0)
-        core.Material = Enum.Material.SmoothPlastic
-        core.Anchored = false
-        core.CanCollide = false
-        core.Massless = true
-        core.CFrame = head.CFrame * CFrame.new(0, 3, 0)
-        local w = Instance.new("WeldConstraint")
-        w.Part0 = head
-        w.Part1 = core
-        w.Parent = core
-        core.Parent = blackHoleFolder
-        local diskParts = {}
-        for ring = 1, 3 do
-            for i = 1, 24 do
-                local p = Instance.new("Part")
-                p.Size = Vector3.new(0.4, 0.1, 0.2)
-                p.Color = Color3.fromHSV((ring / 4) + 0.75, 0.8, 1)
-                p.Material = Enum.Material.Neon
-                p.Transparency = 0.2
-                p.Anchored = false
-                p.CanCollide = false
-                p.Massless = true
-                p.CFrame = head.CFrame * CFrame.new(0, 3, 0)
-                local wp = Instance.new("WeldConstraint")
-                wp.Part0 = head
-                wp.Part1 = p
-                wp.Parent = p
-                p.Parent = blackHoleFolder
-                table.insert(diskParts, { part = p, angle = (i / 24) * math.pi * 2, ring = ring })
-            end
-        end
-        local light = Instance.new("PointLight")
-        light.Color = Color3.fromRGB(150, 80, 255)
-        light.Brightness = 5
-        light.Range = 12
-        light.Parent = core
-        if blackHoleConn then blackHoleConn:Disconnect() end
-        blackHoleConn = RunService.Heartbeat:Connect(function()
-            local c = LocalPlayer.Character
-            local h = c and c:FindFirstChild("Head")
-            if not h or not core.Parent then return end
-            core.CFrame = h.CFrame * CFrame.new(0, 3, 0) * CFrame.Angles(tick() * 0.5, tick() * 0.8, 0)
-            for _, data in ipairs(diskParts) do
-                local speed = 5 - data.ring * 0.5
-                local a = data.angle + tick() * speed
-                local r = data.ring * 0.8 + 0.6
-                data.part.CFrame = h.CFrame * CFrame.new(0, 3, 0) * CFrame.new(math.cos(a) * r, math.sin(tick() * 3 + data.ring) * 0.15, math.sin(a) * r) * CFrame.Angles(0, a, math.rad(90))
-            end
-        end)
-    else
-        if blackHoleConn then blackHoleConn:Disconnect() blackHoleConn = nil end
-        if blackHoleFolder then blackHoleFolder:Destroy() blackHoleFolder = nil end
-    end
-end
-makeButton(visualsTab, "Black Hole", function(btn, ind) toggleBlackHole(); if blackHoleOn then setOn(btn, ind) else setOff(btn, ind) end; notify(blackHoleOn and "Black Hole вкл" or "Black Hole выкл") end)
-bindActions["Black Hole"] = toggleBlackHole
-
-soulFlameOn = false
-soulFlameFolder = nil
-soulFlameConn = nil
-local function toggleSoulFlame()
-    soulFlameOn = not soulFlameOn
-    if soulFlameOn then
-        soulFlameFolder = Instance.new("Folder")
-        soulFlameFolder.Parent = workspace
-        soulFlameConn = RunService.Heartbeat:Connect(function()
-            local c = LocalPlayer.Character
-            local h = c and c:FindFirstChild("HumanoidRootPart")
-            if not h then return end
-            if math.random() < 0.6 then
-                local flame = Instance.new("Part")
-                flame.Shape = Enum.PartType.Ball
-                flame.Size = Vector3.new(math.random(3, 6) / 10, math.random(5, 10) / 10, math.random(3, 6) / 10)
-                flame.Color = Color3.fromRGB(100, 150, 255)
-                flame.Material = Enum.Material.Neon
-                flame.Transparency = 0.2
-                flame.Anchored = true
-                flame.CanCollide = false
-                local a = math.random() * math.pi * 2
-                local r = math.random() * 2
-                flame.Position = h.Position + Vector3.new(math.cos(a) * r, math.random(-3, 3), math.sin(a) * r)
-                flame.Parent = soulFlameFolder
-                local endPos = flame.Position + Vector3.new(0, 3, 0)
-                TweenService:Create(flame, TweenInfo.new(1.2), {Position = endPos, Size = Vector3.new(0.1, 0.1, 0.1), Transparency = 1}):Play()
-                task.delay(1.2, function() if flame then flame:Destroy() end end)
-            end
-        end)
-    else
-        if soulFlameConn then soulFlameConn:Disconnect() soulFlameConn = nil end
-        if soulFlameFolder then soulFlameFolder:Destroy() soulFlameFolder = nil end
-    end
-end
-makeButton(visualsTab, "Soul Flame", function(btn, ind) toggleSoulFlame(); if soulFlameOn then setOn(btn, ind) else setOff(btn, ind) end; notify(soulFlameOn and "Soul Flame вкл" or "Soul Flame выкл") end)
-bindActions["Soul Flame"] = toggleSoulFlame
-
-energyBeamOn = false
-energyBeamPart = nil
-energyBeamCore = nil
-energyBeamConn = nil
-local function toggleEnergyBeam()
-    energyBeamOn = not energyBeamOn
-    if energyBeamOn then
-        local char = LocalPlayer.Character
-        local hrp = char and char:FindFirstChild("HumanoidRootPart")
-        if not hrp then return end
-        energyBeamPart = Instance.new("Part")
-        energyBeamPart.Size = Vector3.new(1.5, 60, 1.5)
-        energyBeamPart.Color = C_ACCENT
-        energyBeamPart.Material = Enum.Material.Neon
-        energyBeamPart.Transparency = 0.4
-        energyBeamPart.Anchored = false
-        energyBeamPart.CanCollide = false
-        energyBeamPart.Massless = true
-        energyBeamPart.CFrame = hrp.CFrame * CFrame.new(0, 30, 0)
-        local w = Instance.new("WeldConstraint")
-        w.Part0 = hrp
-        w.Part1 = energyBeamPart
-        w.Parent = energyBeamPart
-        energyBeamPart.Parent = char
-        energyBeamCore = Instance.new("Part")
-        energyBeamCore.Shape = Enum.PartType.Ball
-        energyBeamCore.Size = Vector3.new(2, 2, 2)
-        energyBeamCore.Color = C_ACCENT2
-        energyBeamCore.Material = Enum.Material.Neon
-        energyBeamCore.Anchored = false
-        energyBeamCore.CanCollide = false
-        energyBeamCore.Massless = true
-        energyBeamCore.CFrame = hrp.CFrame * CFrame.new(0, 3, 0)
-        local w2 = Instance.new("WeldConstraint")
-        w2.Part0 = hrp
-        w2.Part1 = energyBeamCore
-        w2.Parent = energyBeamCore
-        energyBeamCore.Parent = char
-        local light = Instance.new("PointLight")
-        light.Color = C_ACCENT
-        light.Brightness = 8
-        light.Range = 20
-        light.Parent = energyBeamCore
-        if energyBeamConn then energyBeamConn:Disconnect() end
-        energyBeamConn = RunService.Heartbeat:Connect(function()
-            if energyBeamPart then
-                local scale = 1 + math.sin(tick() * 8) * 0.15
-                energyBeamPart.Size = Vector3.new(1.5 * scale, 60, 1.5 * scale)
-                energyBeamPart.Transparency = 0.3 + math.sin(tick() * 5) * 0.1
-            end
-        end)
-    else
-        if energyBeamConn then energyBeamConn:Disconnect() energyBeamConn = nil end
-        if energyBeamPart then energyBeamPart:Destroy() energyBeamPart = nil end
-        if energyBeamCore then energyBeamCore:Destroy() energyBeamCore = nil end
-    end
-end
-makeButton(visualsTab, "Energy Beam", function(btn, ind) toggleEnergyBeam(); if energyBeamOn then setOn(btn, ind) else setOff(btn, ind) end; notify(energyBeamOn and "Energy Beam вкл" or "Energy Beam выкл") end)
-bindActions["Energy Beam"] = toggleEnergyBeam
-
-auraWingsOn = false
-auraWingsFolder = nil
-auraWingsConn = nil
-local function toggleAuraWings()
-    auraWingsOn = not auraWingsOn
-    if auraWingsOn then
-        auraWingsFolder = Instance.new("Folder")
-        auraWingsFolder.Parent = workspace
-        local wings = {}
-        for side = -1, 1, 2 do
-            for i = 1, 6 do
-                local p = Instance.new("Part")
-                p.Size = Vector3.new(0.3, 3 + i * 0.3, 0.15)
-                p.Color = C_ACCENT
-                p.Material = Enum.Material.Neon
-                p.Transparency = 0.2
-                p.Anchored = true
-                p.CanCollide = false
-                p.Parent = auraWingsFolder
-                table.insert(wings, { part = p, side = side, i = i })
-            end
-        end
-        if auraWingsConn then auraWingsConn:Disconnect() end
-        auraWingsConn = RunService.Heartbeat:Connect(function()
-            local c = LocalPlayer.Character
-            local t = c and (c:FindFirstChild("UpperTorso") or c:FindFirstChild("Torso"))
-            if not t then return end
-            for _, data in ipairs(wings) do
-                local flap = math.sin(tick() * 3 + data.i * 0.4) * 20
-                local spread = data.i * 0.6
-                local angle = math.rad(60 + flap)
-                data.part.CFrame = t.CFrame * CFrame.new(data.side * spread * math.cos(angle), spread * 0.3, 1) * CFrame.Angles(0, 0, data.side * (angle - math.rad(45)))
-                data.part.Color = Color3.fromHSV((tick() * 0.4 + data.i * 0.1) % 1, 0.7, 1)
-            end
-        end)
-    else
-        if auraWingsConn then auraWingsConn:Disconnect() auraWingsConn = nil end
-        if auraWingsFolder then auraWingsFolder:Destroy() auraWingsFolder = nil end
-    end
-end
-makeButton(visualsTab, "Aura Wings", function(btn, ind) toggleAuraWings(); if auraWingsOn then setOn(btn, ind) else setOff(btn, ind) end; notify(auraWingsOn and "Aura Wings вкл" or "Aura Wings выкл") end)
-bindActions["Aura Wings"] = toggleAuraWings
-
-rainbowWaveOn = false
-rainbowWaveFolder = nil
-rainbowWaveConn = nil
-local function toggleRainbowWave()
-    rainbowWaveOn = not rainbowWaveOn
-    if rainbowWaveOn then
-        rainbowWaveFolder = Instance.new("Folder")
-        rainbowWaveFolder.Parent = workspace
-        local waves = {}
-        for i = 1, 36 do
-            local p = Instance.new("Part")
-            p.Size = Vector3.new(0.6, 0.15, 0.3)
-            p.Material = Enum.Material.Neon
-            p.Transparency = 0.3
-            p.Anchored = true
-            p.CanCollide = false
-            p.Parent = rainbowWaveFolder
-            table.insert(waves, { part = p, angle = (i / 36) * math.pi * 2 })
-        end
-        if rainbowWaveConn then rainbowWaveConn:Disconnect() end
-        rainbowWaveConn = RunService.Heartbeat:Connect(function()
-            local c = LocalPlayer.Character
-            local h = c and c:FindFirstChild("HumanoidRootPart")
-            if not h then return end
-            local groundY = h.Position.Y - 3
-            for i, data in ipairs(waves) do
-                local a = data.angle + tick() * 0.3
-                local wave = math.sin(tick() * 3 + i * 0.2) * 0.5
-                local r = 3 + wave
-                data.part.CFrame = CFrame.new(h.Position.X + math.cos(a) * r, groundY + wave * 0.5, h.Position.Z + math.sin(a) * r) * CFrame.Angles(0, -a, 0)
-                data.part.Color = Color3.fromHSV(((tick() * 0.5) + i / 36) % 1, 0.9, 1)
-            end
-        end)
-    else
-        if rainbowWaveConn then rainbowWaveConn:Disconnect() rainbowWaveConn = nil end
-        if rainbowWaveFolder then rainbowWaveFolder:Destroy() rainbowWaveFolder = nil end
-    end
-end
-makeButton(visualsTab, "Rainbow Wave", function(btn, ind) toggleRainbowWave(); if rainbowWaveOn then setOn(btn, ind) else setOff(btn, ind) end; notify(rainbowWaveOn and "Rainbow Wave вкл" or "Rainbow Wave выкл") end)
-bindActions["Rainbow Wave"] = toggleRainbowWave
-
-fireRingOn = false
-fireRingFolder = nil
-fireRingConn = nil
-local function toggleFireRing()
-    fireRingOn = not fireRingOn
-    if fireRingOn then
-        fireRingFolder = Instance.new("Folder")
-        fireRingFolder.Parent = workspace
-        local parts = {}
-        for i = 1, 30 do
-            local p = Instance.new("Part")
-            p.Shape = Enum.PartType.Ball
-            p.Size = Vector3.new(0.5, 0.5, 0.5)
-            p.Color = Color3.fromRGB(255, 100, 0)
-            p.Material = Enum.Material.Neon
-            p.Transparency = 0.2
-            p.Anchored = true
-            p.CanCollide = false
-            p.Parent = fireRingFolder
-            table.insert(parts, { part = p, angle = (i / 30) * math.pi * 2 })
-        end
-        if fireRingConn then fireRingConn:Disconnect() end
-        fireRingConn = RunService.Heartbeat:Connect(function()
-            local c = LocalPlayer.Character
-            local h = c and c:FindFirstChild("HumanoidRootPart")
-            if not h then return end
-            local tilt = math.sin(tick() * 0.5) * 30
-            for i, data in ipairs(parts) do
-                local a = data.angle + tick() * 3
-                local r = 2.5
-                data.part.CFrame = h.CFrame * CFrame.new(math.cos(a) * r, -2.5, math.sin(a) * r) * CFrame.Angles(0, 0, math.rad(tilt))
-                data.part.Color = Color3.fromHSV(0.02 + math.sin(tick() * 5 + i) * 0.05, 1, 1)
-            end
-        end)
-    else
-        if fireRingConn then fireRingConn:Disconnect() fireRingConn = nil end
-        if fireRingFolder then fireRingFolder:Destroy() fireRingFolder = nil end
-    end
-end
-makeButton(visualsTab, "Fire Ring", function(btn, ind) toggleFireRing(); if fireRingOn then setOn(btn, ind) else setOff(btn, ind) end; notify(fireRingOn and "Fire Ring вкл" or "Fire Ring выкл") end)
-bindActions["Fire Ring"] = toggleFireRing
-
-iceCrystalsOn = false
-iceCrystalsFolder = nil
-iceCrystalsConn = nil
-local function toggleIceCrystals()
-    iceCrystalsOn = not iceCrystalsOn
-    if iceCrystalsOn then
-        iceCrystalsFolder = Instance.new("Folder")
-        iceCrystalsFolder.Parent = workspace
-        local crystals = {}
-        for i = 1, 10 do
-            local crystal = Instance.new("Part")
-            crystal.Size = Vector3.new(0.3, 0.8, 0.3)
-            crystal.Color = Color3.fromRGB(150, 220, 255)
-            crystal.Material = Enum.Material.Ice
-            crystal.Transparency = 0.2
-            crystal.Anchored = true
-            crystal.CanCollide = false
-            crystal.Parent = iceCrystalsFolder
-            table.insert(crystals, { part = crystal, angle = (i / 10) * math.pi * 2, y = math.random() * 4 })
-        end
-        if iceCrystalsConn then iceCrystalsConn:Disconnect() end
-        iceCrystalsConn = RunService.Heartbeat:Connect(function(dt)
-            local c = LocalPlayer.Character
-            local h = c and c:FindFirstChild("HumanoidRootPart")
-            if not h then return end
-            for _, data in ipairs(crystals) do
-                data.y = data.y + dt * 0.5
-                if data.y > 5 then data.y = 0 end
-                local a = data.angle + tick() * 1
-                data.part.CFrame = h.CFrame * CFrame.new(math.cos(a) * 2.5, -2 + data.y, math.sin(a) * 2.5) * CFrame.Angles(tick() * 2, a, tick() * 1.5)
-            end
-        end)
-    else
-        if iceCrystalsConn then iceCrystalsConn:Disconnect() iceCrystalsConn = nil end
-        if iceCrystalsFolder then iceCrystalsFolder:Destroy() iceCrystalsFolder = nil end
-    end
-end
-makeButton(visualsTab, "Ice Crystals", function(btn, ind) toggleIceCrystals(); if iceCrystalsOn then setOn(btn, ind) else setOff(btn, ind) end; notify(iceCrystalsOn and "Ice Crystals вкл" or "Ice Crystals выкл") end)
-bindActions["Ice Crystals"] = toggleIceCrystals
-
-shadowOn = false
-shadowFolder = nil
-shadowConn = nil
-local function toggleShadow()
-    shadowOn = not shadowOn
-    if shadowOn then
-        shadowFolder = Instance.new("Folder")
-        shadowFolder.Parent = workspace
-        local parts = {}
-        for i = 1, 25 do
-            local p = Instance.new("Part")
-            p.Size = Vector3.new(0.4, 0.8, 0.4)
-            p.Color = Color3.fromRGB(30, 0, 50)
-            p.Material = Enum.Material.Neon
-            p.Transparency = 0.4
-            p.Anchored = true
-            p.CanCollide = false
-            p.Parent = shadowFolder
-            table.insert(parts, { part = p, angle = (i / 25) * math.pi * 2, y = math.random() * 4 })
-        end
-        if shadowConn then shadowConn:Disconnect() end
-        shadowConn = RunService.Heartbeat:Connect(function(dt)
-            local c = LocalPlayer.Character
-            local h = c and c:FindFirstChild("HumanoidRootPart")
-            if not h then return end
-            for _, data in ipairs(parts) do
-                data.y = data.y + dt * 2
-                if data.y > 5 then data.y = 0 end
-                local a = data.angle + tick() * 2
-                data.part.CFrame = h.CFrame * CFrame.new(math.cos(a) * 2.5, -3 + data.y, math.sin(a) * 2.5) * CFrame.Angles(math.sin(tick() * 3) * 0.5, a, math.cos(tick() * 3) * 0.5)
-            end
-        end)
-    else
-        if shadowConn then shadowConn:Disconnect() shadowConn = nil end
-        if shadowFolder then shadowFolder:Destroy() shadowFolder = nil end
-    end
-end
-makeButton(visualsTab, "Shadow Aura", function(btn, ind) toggleShadow(); if shadowOn then setOn(btn, ind) else setOff(btn, ind) end; notify(shadowOn and "Shadow Aura вкл" or "Shadow Aura выкл") end)
-bindActions["Shadow Aura"] = toggleShadow
-
-goldenOn = false
-goldenFolder = nil
-goldenConn = nil
-local function toggleGolden()
-    goldenOn = not goldenOn
-    if goldenOn then
-        goldenFolder = Instance.new("Folder")
-        goldenFolder.Parent = workspace
-        local parts = {}
-        for i = 1, 24 do
-            local p = Instance.new("Part")
-            p.Shape = Enum.PartType.Ball
-            p.Size = Vector3.new(0.3, 0.3, 0.3)
-            p.Color = Color3.fromRGB(255, 215, 0)
-            p.Material = Enum.Material.Neon
-            p.Transparency = 0.15
-            p.Anchored = true
-            p.CanCollide = false
-            p.Parent = goldenFolder
-            table.insert(parts, { part = p, angle = (i / 24) * math.pi * 2, y = math.random() * 5 })
-        end
-        if goldenConn then goldenConn:Disconnect() end
-        goldenConn = RunService.Heartbeat:Connect(function(dt)
-            local c = LocalPlayer.Character
-            local h = c and c:FindFirstChild("HumanoidRootPart")
-            if not h then return end
-            for _, data in ipairs(parts) do
-                data.y = data.y + dt * 1.5
-                if data.y > 6 then data.y = 0 end
-                local a = data.angle + tick() * 1.5
-                local r = 2.5 + math.sin(tick() * 2 + data.y) * 0.3
-                data.part.CFrame = h.CFrame * CFrame.new(math.cos(a) * r, -3 + data.y, math.sin(a) * r)
-            end
-        end)
-    else
-        if goldenConn then goldenConn:Disconnect() goldenConn = nil end
-        if goldenFolder then goldenFolder:Destroy() goldenFolder = nil end
-    end
-end
-makeButton(visualsTab, "Golden Aura", function(btn, ind) toggleGolden(); if goldenOn then setOn(btn, ind) else setOff(btn, ind) end; notify(goldenOn and "Golden Aura вкл" or "Golden Aura выкл") end)
-bindActions["Golden Aura"] = toggleGolden
-
-laserEyesOn = false
-laserEyesFolder = nil
-laserEyesConn = nil
-local function toggleLaserEyes()
-    laserEyesOn = not laserEyesOn
-    if laserEyesOn then
-        laserEyesFolder = Instance.new("Folder")
-        laserEyesFolder.Parent = workspace
-        local lasers = {}
-        for _, side in ipairs({-0.15, 0.15}) do
-            local p = Instance.new("Part")
-            p.Size = Vector3.new(0.1, 0.1, 50)
-            p.Color = Color3.fromRGB(255, 0, 0)
-            p.Material = Enum.Material.Neon
-            p.Transparency = 0.3
-            p.Anchored = true
-            p.CanCollide = false
-            p.Parent = laserEyesFolder
-            table.insert(lasers, { part = p, side = side })
-        end
-        if laserEyesConn then laserEyesConn:Disconnect() end
-        laserEyesConn = RunService.Heartbeat:Connect(function()
-            local c = LocalPlayer.Character
-            local head = c and c:FindFirstChild("Head")
-            if not head then return end
-            local cam = workspace.CurrentCamera
-            for _, data in ipairs(lasers) do
-                local startCF = head.CFrame * CFrame.new(data.side, 0.3, -0.6)
-                local dir = cam.CFrame.LookVector
-                data.part.CFrame = CFrame.new(startCF.Position + dir * 25, startCF.Position + dir * 50)
-                data.part.Size = Vector3.new(0.1 + math.sin(tick() * 20) * 0.03, 0.1 + math.sin(tick() * 20) * 0.03, 50)
-            end
-        end)
-    else
-        if laserEyesConn then laserEyesConn:Disconnect() laserEyesConn = nil end
-        if laserEyesFolder then laserEyesFolder:Destroy() laserEyesFolder = nil end
-    end
-end
-makeButton(visualsTab, "Laser Eyes", function(btn, ind) toggleLaserEyes(); if laserEyesOn then setOn(btn, ind) else setOff(btn, ind) end; notify(laserEyesOn and "Laser Eyes вкл" or "Laser Eyes выкл") end)
-bindActions["Laser Eyes"] = toggleLaserEyes
-
-snowAuraOn = false
-snowAuraFolder = nil
-snowAuraConn = nil
-local function toggleSnowAura()
-    snowAuraOn = not snowAuraOn
-    if snowAuraOn then
-        snowAuraFolder = Instance.new("Folder")
-        snowAuraFolder.Parent = workspace
-        local flakes = {}
-        for i = 1, 20 do
-            local flake = Instance.new("Part")
-            flake.Size = Vector3.new(0.25, 0.05, 0.25)
-            flake.Color = Color3.fromRGB(220, 240, 255)
-            flake.Material = Enum.Material.Neon
-            flake.Transparency = 0.2
-            flake.Anchored = true
-            flake.CanCollide = false
-            flake.Parent = snowAuraFolder
-            table.insert(flakes, { part = flake, angle = math.random() * math.pi * 2, r = 1.5 + math.random() * 2, y = math.random() * 6, rot = math.random() * 360 })
-        end
-        if snowAuraConn then snowAuraConn:Disconnect() end
-        snowAuraConn = RunService.Heartbeat:Connect(function(dt)
-            local c = LocalPlayer.Character
-            local h = c and c:FindFirstChild("HumanoidRootPart")
-            if not h then return end
-            for _, data in ipairs(flakes) do
-                data.y = data.y - dt * 1.5
-                if data.y < -3 then data.y = 6 end
-                data.angle = data.angle + dt * 0.5
-                data.rot = data.rot + dt * 120
-                data.part.CFrame = h.CFrame * CFrame.new(math.cos(data.angle) * data.r, data.y, math.sin(data.angle) * data.r) * CFrame.Angles(0, math.rad(data.rot), 0)
-            end
-        end)
-    else
-        if snowAuraConn then snowAuraConn:Disconnect() snowAuraConn = nil end
-        if snowAuraFolder then snowAuraFolder:Destroy() snowAuraFolder = nil end
-    end
-end
-makeButton(visualsTab, "Snow Aura", function(btn, ind) toggleSnowAura(); if snowAuraOn then setOn(btn, ind) else setOff(btn, ind) end; notify(snowAuraOn and "Snow Aura вкл" or "Snow Aura выкл") end)
-bindActions["Snow Aura"] = toggleSnowAura
-
-galaxyOrbitOn = false
-galaxyOrbitFolder = nil
-galaxyOrbitConn = nil
-local function toggleGalaxyOrbit()
-    galaxyOrbitOn = not galaxyOrbitOn
-    if galaxyOrbitOn then
-        galaxyOrbitFolder = Instance.new("Folder")
-        galaxyOrbitFolder.Parent = workspace
-        local planets = {}
-        for i = 1, 5 do
-            local planet = Instance.new("Part")
-            planet.Shape = Enum.PartType.Ball
-            planet.Size = Vector3.new(0.5 + i * 0.1, 0.5 + i * 0.1, 0.5 + i * 0.1)
-            planet.Color = Color3.fromHSV(i / 5, 0.7, 1)
-            planet.Material = Enum.Material.Neon
-            planet.Anchored = true
-            planet.CanCollide = false
-            planet.Parent = galaxyOrbitFolder
-            local ring = Instance.new("Part")
-            ring.Shape = Enum.PartType.Cylinder
-            ring.Size = Vector3.new(0.05, 1 + i * 0.2, 1 + i * 0.2)
-            ring.Color = Color3.fromHSV(i / 5, 0.5, 1)
-            ring.Material = Enum.Material.Neon
-            ring.Transparency = 0.4
-            ring.Anchored = true
-            ring.CanCollide = false
-            ring.Parent = galaxyOrbitFolder
-            table.insert(planets, { planet = planet, ring = ring, angle = (i / 5) * math.pi * 2, dist = 3 + i * 0.3, yOffset = (i - 3) * 0.5 })
-        end
-        if galaxyOrbitConn then galaxyOrbitConn:Disconnect() end
-        galaxyOrbitConn = RunService.Heartbeat:Connect(function()
-            local c = LocalPlayer.Character
-            local h = c and c:FindFirstChild("HumanoidRootPart")
-            if not h then return end
-            for _, data in ipairs(planets) do
-                local a = data.angle + tick() * (1 + data.dist * 0.1)
-                local pos = h.Position + Vector3.new(math.cos(a) * data.dist, data.yOffset, math.sin(a) * data.dist)
-                data.planet.CFrame = CFrame.new(pos) * CFrame.Angles(tick() * 2, tick() * 2, 0)
-                data.ring.CFrame = CFrame.new(pos) * CFrame.Angles(math.rad(70), tick() * 1.5, 0)
-            end
-        end)
-    else
-        if galaxyOrbitConn then galaxyOrbitConn:Disconnect() galaxyOrbitConn = nil end
-        if galaxyOrbitFolder then galaxyOrbitFolder:Destroy() galaxyOrbitFolder = nil end
-    end
-end
-makeButton(visualsTab, "Galaxy Orbit", function(btn, ind) toggleGalaxyOrbit(); if galaxyOrbitOn then setOn(btn, ind) else setOff(btn, ind) end; notify(galaxyOrbitOn and "Galaxy Orbit вкл" or "Galaxy Orbit выкл") end)
-bindActions["Galaxy Orbit"] = toggleGalaxyOrbit
-
--- SCRIPTS
-local scriptList = {
-    { name = "DropKick", url = "https://raw.githubusercontent.com/platinww/CrustyMain/refs/heads/main/universal/DropKick.lua" },
-    { name = "Bundle Animations", url = "https://raw.githubusercontent.com/Bac0nHck/Scripts/refs/heads/main/BundleAnimations.lua" },
-    { name = "Infinite Yield", url = "https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source" },
-    { name = "Universal ESP", url = "https://raw.githubusercontent.com/L5ks8/Esp/main/loader" },
-    { name = "Volt Hub", url = "https://raw.githubusercontent.com/Dev-VoltHub/Blox-fruits/main/volt.lua" },
-    { name = "TigerX Hub 4.5", url = "https://raw.githubusercontent.com/BalintTheDevXBack/Universal/refs/heads/main/TigerXHub4.5" },
-    { name = "Owl Hub", url = "https://raw.githubusercontent.com/OwlHUB/OwlHub/main/Main.lua" },
-    { name = "Rayfield UI", url = "https://raw.githubusercontent.com/rayfield-library/Rayfield/main/Rayfield.lua" },
-    { name = "Kavo UI", url = "https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua" },
-    { name = "Hydroxide", url = "https://raw.githubusercontent.com/Upbolt/Hydroxide/master/main.lua" },
-    { name = "MM2 Mozql", url = "https://raw.githubusercontent.com/snxpzscripts/mm2/refs/heads/main/MozqlHub" },
-    { name = "MM2 Fury", url = "https://codeberg.org/dev-str/Loader/raw/branch/main/mm2.loader" },
-}
-local function loadScript(url)
-    local s, e = pcall(function() loadstring(game:HttpGet(url))() end)
-    if not s then warn("[Scripts] " .. tostring(e)) end
-end
-for _, script in ipairs(scriptList) do
-    makeButton(scriptsTab, script.name, function(btn, ind)
-        loadScript(script.url)
-        TweenService:Create(ind, TweenInfo.new(0.1), {BackgroundColor3 = C_ACCENT}):Play()
-        task.wait(0.3)
-        TweenService:Create(ind, TweenInfo.new(0.2), {BackgroundColor3 = C_TEXT_DIM}):Play()
-        notify("Загружен: " .. script.name)
-    end)
-end
-
-local customFrame = Instance.new("Frame")
-customFrame.Size = UDim2.new(0, 380, 0, 100)
-customFrame.BackgroundColor3 = C_PANEL
-customFrame.BorderSizePixel = 0
-customFrame.Parent = scriptsTab
-Instance.new("UICorner", customFrame).CornerRadius = UDim.new(0, 8)
-local ct = Instance.new("TextLabel")
-ct.Size = UDim2.new(1, -10, 0, 20)
-ct.Position = UDim2.new(0, 5, 0, 2)
-ct.BackgroundTransparency = 1
-ct.Text = "СВОЯ ССЫЛКА"
-ct.TextColor3 = C_ACCENT
-ct.Font = Enum.Font.GothamBold
-ct.TextSize = 11
-ct.TextXAlignment = Enum.TextXAlignment.Left
-ct.Parent = customFrame
-local ci = Instance.new("TextBox")
-ci.Size = UDim2.new(1, -10, 0, 26)
-ci.Position = UDim2.new(0, 5, 0, 24)
-ci.BackgroundColor3 = C_BTN
-ci.BorderSizePixel = 0
-ci.Text = ""
-ci.PlaceholderText = "https://..."
-ci.PlaceholderColor3 = C_TEXT_DIM
-ci.TextColor3 = C_TEXT
-ci.Font = Enum.Font.Gotham
-ci.TextSize = 11
-ci.ClearTextOnFocus = false
-ci.Parent = customFrame
-Instance.new("UICorner", ci).CornerRadius = UDim.new(0, 6)
-local cb = Instance.new("TextButton")
-cb.Size = UDim2.new(1, -10, 0, 26)
-cb.Position = UDim2.new(0, 5, 0, 54)
-cb.BackgroundColor3 = C_ACCENT
-cb.BorderSizePixel = 0
-cb.Text = "Запустить"
-cb.TextColor3 = Color3.fromRGB(255, 255, 255)
-cb.Font = Enum.Font.GothamBold
-cb.TextSize = 12
-cb.AutoButtonColor = false
-cb.Parent = customFrame
-Instance.new("UICorner", cb).CornerRadius = UDim.new(0, 6)
-cb.MouseButton1Click:Connect(function()
-    local url = ci.Text
-    if url == "" or not url:match("^https?://") then notify("Неверная ссылка", C_RED) return end
-    loadScript(url)
-    notify("Загружено из ссылки")
-end)
-
 -- EXPLOITS
+-- ============================================
+
+-- NOCLIP
 noclipOn = false
 noclipConn = nil
 local function toggleNoclip()
@@ -2419,16 +3386,27 @@ local function toggleNoclip()
         end)
     else
         if noclipConn then noclipConn:Disconnect() noclipConn = nil end
+        local char = LocalPlayer.Character
+        if char then
+            for _, part in ipairs(char:GetDescendants()) do
+                if part:IsA("BasePart") and part.Name ~= "HumanoidRootPart" then part.CanCollide = true end
+            end
+        end
     end
 end
 makeButton(exploitsTab, "Noclip", function(btn, ind) toggleNoclip(); if noclipOn then setOn(btn, ind) else setOff(btn, ind) end; notify(noclipOn and "Noclip вкл" or "Noclip выкл") end)
 bindActions["Noclip"] = toggleNoclip
 
+-- SPEED
 speedOn = false
 speedConn = nil
+origSpeed = 16
 local function toggleSpeed()
     speedOn = not speedOn
     if speedOn then
+        local char = LocalPlayer.Character
+        local hum = char and char:FindFirstChild("Humanoid")
+        if hum then origSpeed = hum.WalkSpeed end
         speedConn = RunService.Heartbeat:Connect(function()
             local c = LocalPlayer.Character
             local h = c and c:FindFirstChild("Humanoid")
@@ -2438,7 +3416,7 @@ local function toggleSpeed()
         if speedConn then speedConn:Disconnect() speedConn = nil end
         local char = LocalPlayer.Character
         local hum = char and char:FindFirstChild("Humanoid")
-        if hum then hum.WalkSpeed = 16 end
+        if hum then hum.WalkSpeed = origSpeed end
     end
 end
 makeButton(exploitsTab, "Speed", function(btn, ind) toggleSpeed(); if speedOn then setOn(btn, ind) else setOff(btn, ind) end; notify(speedOn and "Speed вкл" or "Speed выкл") end, {
@@ -2446,6 +3424,7 @@ makeButton(exploitsTab, "Speed", function(btn, ind) toggleSpeed(); if speedOn th
 })
 bindActions["Speed"] = toggleSpeed
 
+-- ESP
 espOn = false
 espFolder = nil
 local function createESP()
@@ -2471,6 +3450,22 @@ end
 makeButton(exploitsTab, "ESP", function(btn, ind) toggleESP(); if espOn then setOn(btn, ind) else setOff(btn, ind) end; notify(espOn and "ESP вкл" or "ESP выкл") end)
 bindActions["ESP"] = toggleESP
 
+Players.PlayerAdded:Connect(function(plr)
+    if not espOn then return end
+    plr.CharacterAdded:Connect(function(char)
+        task.wait(0.5)
+        if espOn and espFolder then
+            local hl = Instance.new("Highlight")
+            hl.FillColor = C_ACCENT
+            hl.FillTransparency = 0.5
+            hl.OutlineColor = C_ACCENT2
+            hl.Adornee = char
+            hl.Parent = espFolder
+        end
+    end)
+end)
+
+-- BUNNY HOP
 bunnyHopOn = false
 bunnyHopConn = nil
 local function toggleBunnyHop()
@@ -2490,6 +3485,7 @@ end
 makeButton(exploitsTab, "Bunny Hop", function(btn, ind) toggleBunnyHop(); if bunnyHopOn then setOn(btn, ind) else setOff(btn, ind) end; notify(bunnyHopOn and "Bunny Hop вкл" or "Bunny Hop выкл") end)
 bindActions["Bunny Hop"] = toggleBunnyHop
 
+-- AIR JUMP
 airJumpOn = false
 airJumpConn = nil
 lastJumpTime = 0
@@ -2514,6 +3510,7 @@ end
 makeButton(exploitsTab, "Air Jump", function(btn, ind) toggleAirJump(); if airJumpOn then setOn(btn, ind) else setOff(btn, ind) end; notify(airJumpOn and "Air Jump вкл" or "Air Jump выкл") end)
 bindActions["Air Jump"] = toggleAirJump
 
+-- CLICK TP
 clickTpOn = false
 clickTpConn = nil
 local function toggleClickTP()
@@ -2546,6 +3543,7 @@ end
 makeButton(exploitsTab, "Click TP", function(btn, ind) toggleClickTP(); if clickTpOn then setOn(btn, ind) else setOff(btn, ind) end; notify(clickTpOn and "Click TP вкл" or "Click TP выкл") end)
 bindActions["Click TP"] = toggleClickTP
 
+-- AIM ASSIST
 aimAssistOn = false
 aimAssistConn = nil
 local function toggleAimAssist()
@@ -2586,6 +3584,7 @@ end
 makeButton(exploitsTab, "Aim Assist", function(btn, ind) toggleAimAssist(); if aimAssistOn then setOn(btn, ind) else setOff(btn, ind) end; notify(aimAssistOn and "Aim Assist вкл" or "Aim Assist выкл") end)
 bindActions["Aim Assist"] = toggleAimAssist
 
+-- AIMBOT
 aimbotOn = false
 aimbotConn = nil
 local function toggleAimbot()
@@ -2623,6 +3622,7 @@ end
 makeButton(exploitsTab, "Aimbot", function(btn, ind) toggleAimbot(); if aimbotOn then setOn(btn, ind) else setOff(btn, ind) end; notify(aimbotOn and "Aimbot вкл" or "Aimbot выкл") end)
 bindActions["Aimbot"] = toggleAimbot
 
+-- TRIGGER BOT
 triggerBotOn = false
 triggerBotConn = nil
 lastActivate = 0
@@ -2662,6 +3662,7 @@ end
 makeButton(exploitsTab, "Trigger Bot", function(btn, ind) toggleTriggerBot(); if triggerBotOn then setOn(btn, ind) else setOff(btn, ind) end; notify(triggerBotOn and "Trigger Bot вкл" or "Trigger Bot выкл") end)
 bindActions["Trigger Bot"] = toggleTriggerBot
 
+-- ANTI-FLING
 antiFlingOn = false
 antiFlingConn = nil
 antiLastPos = nil
@@ -2684,11 +3685,13 @@ local function toggleAntiFling()
         end)
     else
         if antiFlingConn then antiFlingConn:Disconnect() antiFlingConn = nil end
+        antiLastPos = nil
     end
 end
 makeButton(exploitsTab, "Anti-Fling", function(btn, ind) toggleAntiFling(); if antiFlingOn then setOn(btn, ind) else setOff(btn, ind) end; notify(antiFlingOn and "Anti-Fling вкл" or "Anti-Fling выкл") end)
 bindActions["Anti-Fling"] = toggleAntiFling
 
+-- VELOCITY (бывший Anti-Knockback)
 velocityOn = false
 velocityConn = nil
 local function toggleVelocity()
@@ -2716,6 +3719,7 @@ end
 makeButton(exploitsTab, "Velocity", function(btn, ind) toggleVelocity(); if velocityOn then setOn(btn, ind) else setOff(btn, ind) end; notify(velocityOn and "Velocity вкл" or "Velocity выкл") end)
 bindActions["Velocity"] = toggleVelocity
 
+-- ANTI-AFK
 antiAfkOn = false
 antiAfkConn = nil
 local function toggleAntiAfk()
@@ -2733,6 +3737,7 @@ end
 makeButton(exploitsTab, "Anti-AFK", function(btn, ind) toggleAntiAfk(); if antiAfkOn then setOn(btn, ind) else setOff(btn, ind) end; notify(antiAfkOn and "Anti-AFK вкл" or "Anti-AFK выкл") end)
 bindActions["Anti-AFK"] = toggleAntiAfk
 
+-- FLY
 flyOn = false
 flyConn = nil
 local function toggleFly()
@@ -2789,6 +3794,7 @@ makeButton(exploitsTab, "Fly", function(btn, ind) toggleFly(); if flyOn then set
 })
 bindActions["Fly"] = toggleFly
 
+-- GRAVITY
 gravityOn = false
 gravityValue = 20
 origGravity = workspace.Gravity
@@ -2802,7 +3808,378 @@ makeButton(exploitsTab, "Gravity", function(btn, ind) toggleGravity(); if gravit
 })
 bindActions["Gravity"] = toggleGravity
 
+-- FREEZE
+freezeOn = false
+freezeConn = nil
+freezePos = nil
+local function toggleFreeze()
+    freezeOn = not freezeOn
+    if freezeOn then
+        local char = LocalPlayer.Character
+        local hrp = char and char:FindFirstChild("HumanoidRootPart")
+        if hrp then freezePos = hrp.CFrame end
+        freezeConn = RunService.Heartbeat:Connect(function()
+            local c = LocalPlayer.Character
+            local h = c and c:FindFirstChild("HumanoidRootPart")
+            if h and freezePos then
+                h.CFrame = freezePos
+                h.AssemblyLinearVelocity = Vector3.new(0, 0, 0)
+                h.AssemblyAngularVelocity = Vector3.new(0, 0, 0)
+            end
+        end)
+    else
+        if freezeConn then freezeConn:Disconnect() freezeConn = nil end
+        freezePos = nil
+    end
+end
+makeButton(exploitsTab, "Freeze", function(btn, ind) toggleFreeze(); if freezeOn then setOn(btn, ind) else setOff(btn, ind) end; notify(freezeOn and "Freeze вкл" or "Freeze выкл") end)
+bindActions["Freeze"] = toggleFreeze
+
+-- AUTO CLICKER
+autoClickerOn = false
+autoClickerInterval = 0.1
+local function toggleAutoClicker()
+    autoClickerOn = not autoClickerOn
+    if autoClickerOn then
+        task.spawn(function()
+            while autoClickerOn do
+                pcall(function()
+                    local vu = game:GetService("VirtualUser")
+                    vu:CaptureController()
+                    vu:ClickButton1(Vector2.new())
+                end)
+                task.wait(autoClickerInterval)
+            end
+        end)
+    end
+end
+makeButton(exploitsTab, "Auto Clicker", function(btn, ind) toggleAutoClicker(); if autoClickerOn then setOn(btn, ind) else setOff(btn, ind) end; notify(autoClickerOn and "Auto Clicker вкл" or "Auto Clicker выкл") end)
+bindActions["Auto Clicker"] = toggleAutoClicker
+
+-- TP TO PLAYER
+tpGui = nil
+local function createTpGui()
+    if tpGui then tpGui:Destroy() end
+    tpGui = Instance.new("Frame")
+    tpGui.Size = UDim2.new(0, 240, 0, 120)
+    tpGui.Position = UDim2.new(0.5, -120, 0.5, -60)
+    tpGui.BackgroundColor3 = C_BG
+    tpGui.BorderSizePixel = 0
+    tpGui.Active = true
+    tpGui.Draggable = true
+    tpGui.ZIndex = 10
+    tpGui.Parent = gui
+    Instance.new("UICorner", tpGui).CornerRadius = UDim.new(0, 12)
+    local s = Instance.new("UIStroke")
+    s.Color = C_ACCENT
+    s.Thickness = 1
+    s.Parent = tpGui
+    local t = Instance.new("TextLabel")
+    t.Size = UDim2.new(1, 0, 0, 30)
+    t.BackgroundTransparency = 1
+    t.Text = "TP TO PLAYER"
+    t.TextColor3 = C_ACCENT
+    t.Font = Enum.Font.GothamBold
+    t.TextSize = 13
+    t.Parent = tpGui
+    local inp = Instance.new("TextBox")
+    inp.Size = UDim2.new(1, -20, 0, 30)
+    inp.Position = UDim2.new(0, 10, 0, 35)
+    inp.BackgroundColor3 = C_BTN
+    inp.BorderSizePixel = 0
+    inp.Text = ""
+    inp.PlaceholderText = "Ник игрока..."
+    inp.PlaceholderColor3 = C_TEXT_DIM
+    inp.TextColor3 = C_TEXT
+    inp.Font = Enum.Font.Gotham
+    inp.TextSize = 12
+    inp.ClearTextOnFocus = false
+    inp.Parent = tpGui
+    Instance.new("UICorner", inp).CornerRadius = UDim.new(0, 6)
+    local b = Instance.new("TextButton")
+    b.Size = UDim2.new(1, -20, 0, 30)
+    b.Position = UDim2.new(0, 10, 0, 75)
+    b.BackgroundColor3 = C_ACCENT
+    b.BorderSizePixel = 0
+    b.Text = "Телепортироваться"
+    b.TextColor3 = Color3.fromRGB(255, 255, 255)
+    b.Font = Enum.Font.GothamBold
+    b.TextSize = 12
+    b.AutoButtonColor = false
+    b.Parent = tpGui
+    Instance.new("UICorner", b).CornerRadius = UDim.new(0, 6)
+    b.MouseButton1Click:Connect(function()
+        local target = Players:FindFirstChild(inp.Text)
+        if not target then
+            for _, plr in ipairs(Players:GetPlayers()) do
+                if string.lower(plr.Name):find(string.lower(inp.Text)) then
+                    target = plr
+                    break
+                end
+            end
+        end
+        if not target then return end
+        local char = LocalPlayer.Character
+        local myHrp = char and char:FindFirstChild("HumanoidRootPart")
+        local tc = target.Character
+        local tHrp = tc and tc:FindFirstChild("HumanoidRootPart")
+        if myHrp and tHrp then myHrp.CFrame = tHrp.CFrame * CFrame.new(0, 0, 3) end
+    end)
+end
+makeButton(exploitsTab, "TP to Player", function(btn, ind)
+    if tpGui then tpGui:Destroy() tpGui = nil setOff(btn, ind)
+    else createTpGui() setOn(btn, ind) end
+end)
+
+-- BINDS GUI
+bindsGui = nil
+local function createBindsGui()
+    if bindsGui then bindsGui:Destroy() end
+    bindsGui = Instance.new("Frame")
+    bindsGui.Size = UDim2.new(0, 320, 0, 400)
+    bindsGui.Position = UDim2.new(0.5, -160, 0.5, -200)
+    bindsGui.BackgroundColor3 = C_BG
+    bindsGui.BorderSizePixel = 0
+    bindsGui.Active = true
+    bindsGui.Draggable = true
+    bindsGui.ZIndex = 10
+    bindsGui.Parent = gui
+    Instance.new("UICorner", bindsGui).CornerRadius = UDim.new(0, 12)
+    local s = Instance.new("UIStroke")
+    s.Color = C_ACCENT
+    s.Thickness = 1.5
+    s.Parent = bindsGui
+    local t = Instance.new("TextLabel")
+    t.Size = UDim2.new(1, 0, 0, 30)
+    t.BackgroundTransparency = 1
+    t.Text = "⚙ НАСТРОЙКА БИНДОВ"
+    t.TextColor3 = C_ACCENT
+    t.Font = Enum.Font.GothamBold
+    t.TextSize = 13
+    t.Parent = bindsGui
+    local funcNames = {}
+    for name, _ in pairs(bindActions) do table.insert(funcNames, name) end
+    table.sort(funcNames)
+    local fl = Instance.new("TextLabel")
+    fl.Size = UDim2.new(1, -20, 0, 16)
+    fl.Position = UDim2.new(0, 10, 0, 34)
+    fl.BackgroundTransparency = 1
+    fl.Text = "Функция:"
+    fl.TextColor3 = C_TEXT_DIM
+    fl.Font = Enum.Font.Gotham
+    fl.TextSize = 10
+    fl.TextXAlignment = Enum.TextXAlignment.Left
+    fl.Parent = bindsGui
+    local fb = Instance.new("TextButton")
+    fb.Size = UDim2.new(1, -20, 0, 28)
+    fb.Position = UDim2.new(0, 10, 0, 52)
+    fb.BackgroundColor3 = C_BTN
+    fb.BorderSizePixel = 0
+    fb.Text = funcNames[1] or "Нет"
+    fb.TextColor3 = C_TEXT
+    fb.Font = Enum.Font.Gotham
+    fb.TextSize = 12
+    fb.AutoButtonColor = false
+    fb.Parent = bindsGui
+    Instance.new("UICorner", fb).CornerRadius = UDim.new(0, 6)
+    local fi = 1
+    fb.MouseButton1Click:Connect(function()
+        if #funcNames == 0 then return end
+        fi = fi + 1
+        if fi > #funcNames then fi = 1 end
+        fb.Text = funcNames[fi]
+    end)
+    local kl = Instance.new("TextLabel")
+    kl.Size = UDim2.new(1, -20, 0, 16)
+    kl.Position = UDim2.new(0, 10, 0, 86)
+    kl.BackgroundTransparency = 1
+    kl.Text = "Клавиша:"
+    kl.TextColor3 = C_TEXT_DIM
+    kl.Font = Enum.Font.Gotham
+    kl.TextSize = 10
+    kl.TextXAlignment = Enum.TextXAlignment.Left
+    kl.Parent = bindsGui
+    local kb = Instance.new("TextButton")
+    kb.Size = UDim2.new(1, -20, 0, 28)
+    kb.Position = UDim2.new(0, 10, 0, 106)
+    kb.BackgroundColor3 = C_BTN
+    kb.BorderSizePixel = 0
+    kb.Text = "Нажми клавишу..."
+    kb.TextColor3 = C_TEXT
+    kb.Font = Enum.Font.Gotham
+    kb.TextSize = 12
+    kb.AutoButtonColor = false
+    kb.Parent = bindsGui
+    Instance.new("UICorner", kb).CornerRadius = UDim.new(0, 6)
+    local selectedKey = nil
+    local listening = false
+    kb.MouseButton1Click:Connect(function()
+        listening = true
+        kb.Text = "Слушаю..."
+        kb.BackgroundColor3 = Color3.fromRGB(80, 40, 100)
+    end)
+    UserInputService.InputBegan:Connect(function(input, gpe)
+        if not listening then return end
+        if gpe then return end
+        if input.UserInputType == Enum.UserInputType.Keyboard then
+            selectedKey = input.KeyCode
+            kb.Text = selectedKey.Name
+            kb.BackgroundColor3 = C_BTN
+            listening = false
+        end
+    end)
+    local ab = Instance.new("TextButton")
+    ab.Size = UDim2.new(1, -20, 0, 30)
+    ab.Position = UDim2.new(0, 10, 0, 144)
+    ab.BackgroundColor3 = C_ACCENT
+    ab.BorderSizePixel = 0
+    ab.Text = "Добавить бинд"
+    ab.TextColor3 = Color3.fromRGB(255, 255, 255)
+    ab.Font = Enum.Font.GothamBold
+    ab.TextSize = 12
+    ab.AutoButtonColor = false
+    ab.Parent = bindsGui
+    Instance.new("UICorner", ab).CornerRadius = UDim.new(0, 6)
+    local blf = Instance.new("ScrollingFrame")
+    blf.Size = UDim2.new(1, -20, 0, 200)
+    blf.Position = UDim2.new(0, 10, 0, 184)
+    blf.BackgroundColor3 = C_PANEL
+    blf.BorderSizePixel = 0
+    blf.ScrollBarThickness = 4
+    blf.ScrollBarImageColor3 = C_ACCENT
+    blf.CanvasSize = UDim2.new(0, 0, 0, 0)
+    blf.AutomaticCanvasSize = Enum.AutomaticSize.Y
+    blf.Parent = bindsGui
+    Instance.new("UICorner", blf).CornerRadius = UDim.new(0, 6)
+    local ll = Instance.new("UIListLayout")
+    ll.Padding = UDim.new(0, 4)
+    ll.SortOrder = Enum.SortOrder.LayoutOrder
+    ll.Parent = blf
+    local function refresh()
+        for _, c in ipairs(blf:GetChildren()) do
+            if c:IsA("TextButton") then c:Destroy() end
+        end
+        for i, bind in ipairs(bindsList) do
+            local row = Instance.new("TextButton")
+            row.Size = UDim2.new(1, -8, 0, 24)
+            row.BackgroundColor3 = C_BTN
+            row.BorderSizePixel = 0
+            row.Text = bind.key.Name .. " → " .. bind.name
+            row.TextColor3 = C_TEXT
+            row.Font = Enum.Font.Gotham
+            row.TextSize = 11
+            row.AutoButtonColor = false
+            row.Parent = blf
+            Instance.new("UICorner", row).CornerRadius = UDim.new(0, 4)
+            row.MouseButton1Click:Connect(function()
+                table.remove(bindsList, i)
+                refresh()
+            end)
+        end
+    end
+    ab.MouseButton1Click:Connect(function()
+        if not selectedKey then notify("Сначала клавишу", C_RED) return end
+        local fn = fb.Text
+        if not bindActions[fn] then notify("Функция не найдена", C_RED) return end
+        addBind(selectedKey, fn, bindActions[fn])
+        selectedKey = nil
+        kb.Text = "Нажми клавишу..."
+        refresh()
+    end)
+    refresh()
+end
+makeButton(exploitsTab, "Binds", function(btn, ind)
+    if bindsGui then bindsGui:Destroy() bindsGui = nil setOff(btn, ind)
+    else createBindsGui() setOn(btn, ind) end
+end)
+
+-- ============================================
+-- SCRIPTS
+-- ============================================
+local scriptList = {
+    { name = "DropKick", url = "https://raw.githubusercontent.com/platinww/CrustyMain/refs/heads/main/universal/DropKick.lua" },
+    { name = "Bundle Animations", url = "https://raw.githubusercontent.com/Bac0nHck/Scripts/refs/heads/main/BundleAnimations.lua" },
+    { name = "Infinite Yield", url = "https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source" },
+    { name = "Universal ESP", url = "https://raw.githubusercontent.com/L5ks8/Esp/main/loader" },
+    { name = "Volt Hub", url = "https://raw.githubusercontent.com/Dev-VoltHub/Blox-fruits/main/volt.lua" },
+    { name = "TigerX Hub 4.5", url = "https://raw.githubusercontent.com/BalintTheDevXBack/Universal/refs/heads/main/TigerXHub4.5" },
+    { name = "FastTravel", url = "https://raw.githubusercontent.com/tomatotxt/-/raw/!/FastTravel" },
+    { name = "Owl Hub", url = "https://raw.githubusercontent.com/OwlHUB/OwlHub/main/Main.lua" },
+    { name = "Rayfield UI", url = "https://raw.githubusercontent.com/rayfield-library/Rayfield/main/Rayfield.lua" },
+    { name = "Calamari Hub", url = "https://raw.githubusercontent.com/CalamariHub/CalamariHub/main/source" },
+    { name = "Kavo UI", url = "https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua" },
+    { name = "Hydroxide", url = "https://raw.githubusercontent.com/Upbolt/Hydroxide/master/main.lua" },
+    { name = "MM2 Mozql Hub", url = "https://raw.githubusercontent.com/snxpzscripts/mm2/refs/heads/main/MozqlHub" },
+    { name = "MM2 Fury Hub", url = "https://codeberg.org/dev-str/Loader/raw/branch/main/mm2.loader" },
+    { name = "MM2 Vant Hub", url = "https://raw.githubusercontent.com/ilickyourmum21-cmd/my-mm2-script/refs/heads/main/main.lua" },
+    { name = "Goon ESP", url = "https://raw.githubusercontent.com/LynX99-9/komtolmmek2script/refs/heads/main/CyraaHub.lua" },
+}
+local function loadScript(url)
+    local s, e = pcall(function() loadstring(game:HttpGet(url))() end)
+    if not s then warn("[Scripts] Ошибка: " .. tostring(e)) end
+end
+for _, script in ipairs(scriptList) do
+    makeButton(scriptsTab, script.name, function(btn, ind)
+        loadScript(script.url)
+        TweenService:Create(ind, TweenInfo.new(0.1), {BackgroundColor3 = C_ACCENT}):Play()
+        task.wait(0.3)
+        TweenService:Create(ind, TweenInfo.new(0.2), {BackgroundColor3 = C_TEXT_DIM}):Play()
+        notify("Загружен: " .. script.name)
+    end)
+end
+
+local customFrame = Instance.new("Frame")
+customFrame.Size = UDim2.new(0, 380, 0, 100)
+customFrame.BackgroundColor3 = C_PANEL
+customFrame.BorderSizePixel = 0
+customFrame.Parent = scriptsTab
+Instance.new("UICorner", customFrame).CornerRadius = UDim.new(0, 8)
+local ct = Instance.new("TextLabel")
+ct.Size = UDim2.new(1, -10, 0, 20)
+ct.Position = UDim2.new(0, 5, 0, 2)
+ct.BackgroundTransparency = 1
+ct.Text = "СВОЯ ССЫЛКА (RAW)"
+ct.TextColor3 = C_ACCENT
+ct.Font = Enum.Font.GothamBold
+ct.TextSize = 11
+ct.TextXAlignment = Enum.TextXAlignment.Left
+ct.Parent = customFrame
+local ci = Instance.new("TextBox")
+ci.Size = UDim2.new(1, -10, 0, 26)
+ci.Position = UDim2.new(0, 5, 0, 24)
+ci.BackgroundColor3 = C_BTN
+ci.BorderSizePixel = 0
+ci.Text = ""
+ci.PlaceholderText = "https://..."
+ci.PlaceholderColor3 = C_TEXT_DIM
+ci.TextColor3 = C_TEXT
+ci.Font = Enum.Font.Gotham
+ci.TextSize = 11
+ci.ClearTextOnFocus = false
+ci.Parent = customFrame
+Instance.new("UICorner", ci).CornerRadius = UDim.new(0, 6)
+local cb = Instance.new("TextButton")
+cb.Size = UDim2.new(1, -10, 0, 26)
+cb.Position = UDim2.new(0, 5, 0, 54)
+cb.BackgroundColor3 = C_ACCENT
+cb.BorderSizePixel = 0
+cb.Text = "Запустить"
+cb.TextColor3 = Color3.fromRGB(255, 255, 255)
+cb.Font = Enum.Font.GothamBold
+cb.TextSize = 12
+cb.AutoButtonColor = false
+cb.Parent = customFrame
+Instance.new("UICorner", cb).CornerRadius = UDim.new(0, 6)
+cb.MouseButton1Click:Connect(function()
+    local url = ci.Text
+    if url == "" or not url:match("^https?://") then notify("Неверная ссылка", C_RED) return end
+    loadScript(url)
+    notify("Загружено из ссылки")
+end)
+
+-- ============================================
 -- FUN
+-- ============================================
 makeButton(funTab, "Particle Burst", function(btn, ind)
     local char = LocalPlayer.Character
     local hrp = char and char:FindFirstChild("HumanoidRootPart")
@@ -2835,20 +4212,26 @@ makeButton(funTab, "Particle Burst", function(btn, ind)
     notify("Particle Burst!")
 end)
 
+-- ============================================
+-- DEV
+-- ============================================
 makeButton(devTab, "TikTok", function(btn, ind)
     pcall(function() setclipboard("@kolbaska_vkusnoa") end)
-    notify("Скопировано")
+    notify("Скопировано: @kolbaska_vkusnoa")
 end)
 makeButton(devTab, "Telegram", function(btn, ind)
     pcall(function() setclipboard("https://t.me/kolbaska_vkusnoa") end)
-    notify("Скопировано")
+    notify("Скопировано: t.me/kolbaska_vkusnoa")
 end)
 
+-- ============================================
+-- SETTINGS
+-- ============================================
 local infoLabel = Instance.new("TextLabel")
 infoLabel.Size = UDim2.new(1, -12, 0, 90)
 infoLabel.BackgroundColor3 = C_PANEL
 infoLabel.BorderSizePixel = 0
-infoLabel.Text = "KOLBASKA HUB v2 ELITE\n@kolbaska_vkusnoa\n\nInjector: " .. (getexecutorname and getexecutorname() or "Unknown")
+infoLabel.Text = "KOLBASKA HUB v3 FINAL\n@kolbaska_vkusnoa\n\nInjector: " .. (getexecutorname and getexecutorname() or "Unknown")
 infoLabel.TextColor3 = C_TEXT_DIM
 infoLabel.Font = Enum.Font.Gotham
 infoLabel.TextSize = 11
@@ -2856,6 +4239,9 @@ infoLabel.TextWrapped = true
 infoLabel.Parent = settingsTab
 Instance.new("UICorner", infoLabel).CornerRadius = UDim.new(0, 8)
 
+-- ============================================
+-- ВОССТАНОВЛЕНИЕ ПОСЛЕ РЕСПАВНА
+-- ============================================
 LocalPlayer.CharacterAdded:Connect(function(char)
     task.wait(1)
     if chinaHatOn then createChinaHat() end
@@ -2866,7 +4252,161 @@ LocalPlayer.CharacterAdded:Connect(function(char)
     if hornsOn then toggleHorns() toggleHorns() end
     if espOn then createESP() end
     if nameTagsOn then createNameTags() end
+    if trailOn then toggleTrail() toggleTrail() end
+    if rainbowTrailOn then toggleRainbowTrail() toggleRainbowTrail() end
 end)
 
-notify("KOLBASKA HUB v2 ELITE загружен!", C_ACCENT2)
-print("Release24 — KOLBASKA HUB v2 ELITE — FULL + 12 VISUALS")
+notify("KOLBASKA HUB v3 FINAL загружен!", C_ACCENT2)
+-- ============================================
+-- ПАТЧ: Возврат Panic, HUD Counter, Freeze + новый Telegram
+-- ============================================
+
+-- PANIC (Exploits)
+panicOn = false
+panicConn = nil
+panicOrigin = nil
+local function togglePanic()
+    panicOn = not panicOn
+    if panicOn then
+        local char = LocalPlayer.Character
+        local hrp = char and char:FindFirstChild("HumanoidRootPart")
+        if not hrp then return end
+        panicOrigin = hrp.Position
+        if panicConn then panicConn:Disconnect() end
+        panicConn = RunService.Heartbeat:Connect(function()
+            local c = LocalPlayer.Character
+            local h = c and c:FindFirstChild("HumanoidRootPart")
+            if not h or not panicOrigin then return end
+            local angle = math.random() * math.pi * 2
+            local radius = math.random() * 30
+            local offset = Vector3.new(math.cos(angle) * radius, math.random(0, 10), math.sin(angle) * radius)
+            h.CFrame = CFrame.new(panicOrigin + offset)
+        end)
+    else
+        if panicConn then panicConn:Disconnect() panicConn = nil end
+        panicOrigin = nil
+    end
+end
+makeButton(exploitsTab, "Panic", function(btn, ind) togglePanic(); if panicOn then setOn(btn, ind) else setOff(btn, ind) end; notify(panicOn and "Panic вкл" or "Panic выкл") end)
+bindActions["Panic"] = togglePanic
+
+-- FREEZE (Exploits)
+freezeOn = false
+freezeConn = nil
+freezePos = nil
+local function toggleFreeze()
+    freezeOn = not freezeOn
+    if freezeOn then
+        local char = LocalPlayer.Character
+        local hrp = char and char:FindFirstChild("HumanoidRootPart")
+        if hrp then freezePos = hrp.CFrame end
+        freezeConn = RunService.Heartbeat:Connect(function()
+            local c = LocalPlayer.Character
+            local h = c and c:FindFirstChild("HumanoidRootPart")
+            if h and freezePos then
+                h.CFrame = freezePos
+                h.AssemblyLinearVelocity = Vector3.new(0, 0, 0)
+                h.AssemblyAngularVelocity = Vector3.new(0, 0, 0)
+            end
+        end)
+    else
+        if freezeConn then freezeConn:Disconnect() freezeConn = nil end
+        freezePos = nil
+    end
+end
+makeButton(exploitsTab, "Freeze", function(btn, ind) toggleFreeze(); if freezeOn then setOn(btn, ind) else setOff(btn, ind) end; notify(freezeOn and "Freeze вкл" or "Freeze выкл") end)
+bindActions["Freeze"] = toggleFreeze
+
+-- HUD COUNTER (Visuals)
+hudVisible = false
+hudFrame = nil
+local function createHUD()
+    if hudFrame then hudFrame:Destroy() end
+    hudFrame = Instance.new("Frame")
+    hudFrame.Name = "HUD"
+    hudFrame.Size = UDim2.new(0, 190, 0, 120)
+    hudFrame.Position = UDim2.new(1, -210, 0, 20)
+    hudFrame.BackgroundColor3 = C_BG
+    hudFrame.BackgroundTransparency = 0.2
+    hudFrame.BorderSizePixel = 0
+    hudFrame.Active = true
+    hudFrame.Draggable = true
+    hudFrame.ZIndex = 5
+    hudFrame.Parent = gui
+    Instance.new("UICorner", hudFrame).CornerRadius = UDim.new(0, 10)
+    local hudStroke = Instance.new("UIStroke")
+    hudStroke.Color = C_ACCENT
+    hudStroke.Thickness = 1
+    hudStroke.Transparency = 0.3
+    hudStroke.Parent = hudFrame
+    local hudTitle = Instance.new("TextLabel")
+    hudTitle.Size = UDim2.new(1, -12, 0, 20)
+    hudTitle.Position = UDim2.new(0, 6, 0, 4)
+    hudTitle.BackgroundTransparency = 1
+    hudTitle.Text = "KOLBASKA HUD"
+    hudTitle.TextColor3 = C_ACCENT
+    hudTitle.Font = Enum.Font.GothamBold
+    hudTitle.TextSize = 11
+    hudTitle.TextXAlignment = Enum.TextXAlignment.Left
+    hudTitle.Parent = hudFrame
+    local hudLabel = Instance.new("TextLabel")
+    hudLabel.Name = "HUDLabel"
+    hudLabel.Size = UDim2.new(1, -12, 1, -30)
+    hudLabel.Position = UDim2.new(0, 6, 0, 24)
+    hudLabel.BackgroundTransparency = 1
+    hudLabel.Text = ""
+    hudLabel.TextColor3 = C_TEXT
+    hudLabel.Font = Enum.Font.Gotham
+    hudLabel.TextSize = 12
+    hudLabel.TextXAlignment = Enum.TextXAlignment.Left
+    hudLabel.TextYAlignment = Enum.TextYAlignment.Top
+    hudLabel.Parent = hudFrame
+    task.spawn(function()
+        local lastPos, lastTime = nil, tick()
+        while hudFrame and hudFrame.Parent do
+            local fps = math.floor(1 / RunService.RenderStepped:Wait())
+            local ping = math.floor(LocalPlayer:GetNetworkPing() * 1000)
+            local bps = 0
+            local char = LocalPlayer.Character
+            local hrp = char and char:FindFirstChild("HumanoidRootPart")
+            if hrp then
+                local now = tick()
+                local dt = now - lastTime
+                if lastPos and dt > 0 then
+                    bps = math.floor((hrp.Position - lastPos).Magnitude / dt)
+                end
+                lastPos = hrp.Position
+                lastTime = now
+            end
+            local injectorName = "Unknown"
+            if getexecutorname then pcall(function() injectorName = getexecutorname() end)
+            elseif identifyexecutor then pcall(function() injectorName = identifyexecutor() end) end
+            hudLabel.Text = string.format("FPS: %d\nPing: %d ms\nBPS: %d studs/s\nInjector: %s\nTime: %s",
+                fps, ping, bps, injectorName, os.date("%H:%M:%S"))
+            task.wait(0.1)
+        end
+    end)
+end
+makeButton(visualsTab, "HUD Counter", function(btn, ind)
+    hudVisible = not hudVisible
+    if hudVisible then createHUD() setOn(btn, ind)
+    else if hudFrame then hudFrame:Destroy() hudFrame = nil end setOff(btn, ind) end
+    notify(hudVisible and "HUD вкл" or "HUD выкл")
+end)
+bindActions["HUD Counter"] = function() hudVisible = not hudVisible end
+
+-- Удаляем старую кнопку Telegram и создаём новую с новым каналом
+for _, data in ipairs(allButtons) do
+    if data.label.Text == "Telegram" then
+        data.btn:Destroy()
+        break
+    end
+end
+
+makeButton(devTab, "Telegram", function(btn, ind)
+    pcall(function() setclipboard("https://t.me/kolbaska_scripts") end)
+    notify("Скопировано: t.me/kolbaska_scripts")
+end)
+
+print("Патч загружен: Panic, Freeze, HUD Counter + Telegram обновлён")
+print("Release25 — KOLBASKA HUB v3 FINAL — COMPLETE")
